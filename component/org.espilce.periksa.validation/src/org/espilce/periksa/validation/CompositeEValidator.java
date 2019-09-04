@@ -23,10 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -38,12 +34,7 @@ public class CompositeEValidator implements EValidator {
 	
 	private static final Logger logger = Logger.getLogger(CompositeEValidator.class);
 	
-	@Inject(optional=true)
-	@Named(value=USE_EOBJECT_VALIDATOR)
 	private boolean useEObjectValidator = true;
-
-	@Inject
-	private Provider<EValidatorEqualitySupport> equalitySupportProvider;
 	
 	//@Inject
 	// TODO: private OperationCanceledManager operationCanceledManager;
@@ -115,7 +106,7 @@ public class CompositeEValidator implements EValidator {
 			for(int i = 0; i < other.getContents().size(); i++)
 				addValidator(other.getContents().get(i).delegate);
 		} else {
-			EValidatorEqualitySupport equalitySupport = equalitySupportProvider.get();
+			EValidatorEqualitySupport equalitySupport = new EValidatorEqualitySupport();
 			equalitySupport.setDelegate(validator);
 			if (!getContents().contains(equalitySupport))
 				this.getContents().add(equalitySupport);
@@ -194,14 +185,6 @@ public class CompositeEValidator implements EValidator {
 		return contents;
 	}
 
-	public void setEqualitySupportProvider(Provider<EValidatorEqualitySupport> equalitySupportProvider) {
-		this.equalitySupportProvider = equalitySupportProvider;
-	}
-
-	public Provider<EValidatorEqualitySupport> getEqualitySupportProvider() {
-		return equalitySupportProvider;
-	}
-
 	/**
 	 * For testing purpose.
 	 * @noreference This method is not intended to be referenced by clients.
@@ -210,7 +193,6 @@ public class CompositeEValidator implements EValidator {
 	 */
 	public CompositeEValidator getCopyAndClearContents() {
 		CompositeEValidator result = new CompositeEValidator();
-		result.equalitySupportProvider = this.equalitySupportProvider;
 		result.useEObjectValidator = this.useEObjectValidator;
 		// TODO: result.operationCanceledManager = this.operationCanceledManager;
 		if (this.contents != null) {

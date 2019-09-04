@@ -11,5 +11,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.apache.log4j,
  com.google.inject,
  org.espilce.periksa.util,
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib,
+ org.eclipse.jdt.annotation
 Export-Package: org.espilce.periksa.validation

@@ -19,28 +19,24 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
-import org.espilce.periksa.util.LanguageInfo;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein 
  */
-public abstract class AbstractInjectableValidator implements EValidator {
+public abstract class AbstractValidator implements EValidator {
 	
-	public static final String CURRENT_LANGUAGE_NAME = AbstractInjectableValidator.class.getCanonicalName() + ".currentLanguageName";
+	public static final String CURRENT_LANGUAGE_NAME = AbstractValidator.class.getCanonicalName() + ".currentLanguageName";
 	/**
 	 * @since 2.4
 	 */
-	public static final String ISSUE_SEVERITIES = AbstractInjectableValidator.class.getCanonicalName() + ".issueSeverities";
+	public static final String ISSUE_SEVERITIES = AbstractValidator.class.getCanonicalName() + ".issueSeverities";
 
-	@Inject@Named(LanguageInfo.LANGUAGE_NAME) 
+	//TODO: language name needed?
 	private String languageName;
 	
-	@Inject
-	public void register(EValidatorRegistrar registrar) {
+	public void register() {
+		EValidatorRegistrar registrar = new EValidatorRegistrar();
 		Collection<EPackage> packages = new LinkedHashSet<EPackage>(getEPackages());
 		if (packages.size()==0) {
 			throw new IllegalStateException("No EPackages were registered for the validator "+getClass().getName()+" please override and implement getEPackages().");

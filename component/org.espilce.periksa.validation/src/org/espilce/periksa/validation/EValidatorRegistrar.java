@@ -10,50 +10,25 @@ package org.espilce.periksa.validation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
 public class EValidatorRegistrar {
 
-	@Inject
-	private EValidator.Registry registry;
+	private EValidator.Registry registry = EValidator.Registry.INSTANCE;
 
-	@Inject
-	private Provider<CompositeEValidator> compositeProvider;
-	
 	public void register(EPackage ePackage, EValidator registerMe) {
-		EValidator validator = getRegistry().getEValidator(ePackage);
+		EValidator validator = registry.getEValidator(ePackage);
 		if (validator == null) {
-			validator = compositeProvider.get();
+			validator = new CompositeEValidator();
 		}
 		else if (!(validator instanceof CompositeEValidator)) {
-			CompositeEValidator newValidator = compositeProvider.get();
+			CompositeEValidator newValidator = new CompositeEValidator();
 			newValidator.addValidator(validator);
 			validator = newValidator;
 		}
 		((CompositeEValidator) validator).addValidator(registerMe);
-		getRegistry().put(ePackage, validator);
+		registry.put(ePackage, validator);
 	}
 
-	public void setRegistry(EValidator.Registry registry) {
-		this.registry = registry;
-	}
-
-	public EValidator.Registry getRegistry() {
-		return registry;
-	}
-
-	public void setCompositeProvider(Provider<CompositeEValidator> compositeProvider) {
-		this.compositeProvider = compositeProvider;
-	}
-
-	public Provider<CompositeEValidator> getCompositeProvider() {
-		return compositeProvider;
-	}
-	
 }

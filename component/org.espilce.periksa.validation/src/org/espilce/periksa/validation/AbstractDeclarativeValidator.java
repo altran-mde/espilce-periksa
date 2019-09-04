@@ -24,13 +24,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
 import org.espilce.periksa.diagnostics.Severity;
 import org.espilce.periksa.util.Exceptions;
 import org.espilce.periksa.util.SimpleCache;
 
 import org.espilce.periksa.util.Function;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using {@link Check} annotation.
@@ -49,7 +49,7 @@ import com.google.inject.Injector;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  */
-public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator implements
+public abstract class AbstractDeclarativeValidator extends AbstractValidator implements
 		ValidationMessageAcceptor {
 
 	@Inject
@@ -158,13 +158,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private ValidationMessageAcceptor messageAcceptor;
 
-	@Inject
-	private Injector injector;
-
-	public void setInjector(Injector injector) {
-		this.injector = injector;
-	}
-
 	public AbstractDeclarativeValidator() {
 		this.state = new ThreadLocal<State>();
 		this.messageAcceptor = this;
@@ -207,25 +200,20 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 	}
 
-	private void collectMethodsImpl(AbstractDeclarativeValidator instance,
+	private void collectMethodsImpl(@NonNull AbstractDeclarativeValidator instance,
 			Class<? extends AbstractDeclarativeValidator> clazz, Collection<Class<?>> visitedClasses,
 			Collection<MethodWrapper> result) {
 		if (!visitedClasses.add(clazz))
 			return;
-		AbstractDeclarativeValidator instanceToUse;
-		instanceToUse = instance;
-		if (instanceToUse == null) {
-			instanceToUse = newInstance(clazz);
-		}
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
-				result.add(createMethodWrapper(instanceToUse, method));
+				result.add(createMethodWrapper(instance, method));
 			}
 		}
 		Class<? extends AbstractDeclarativeValidator> superClass = getSuperClass(clazz);
 		if (superClass != null)
-			collectMethodsImpl(instanceToUse, superClass, visitedClasses, result);
+			collectMethodsImpl(instance, superClass, visitedClasses, result);
 	}
 
 	/**
@@ -233,14 +221,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	 */
 	protected MethodWrapper createMethodWrapper(AbstractDeclarativeValidator instanceToUse, Method method) {
 		return new MethodWrapper(instanceToUse, method);
-	}
-
-	protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
-		AbstractDeclarativeValidator instanceToUse;
-		if (injector == null)
-			throw new IllegalStateException("the class is not configured with an injector.");
-		instanceToUse = injector.getInstance(clazz);
-		return instanceToUse;
 	}
 
 	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(

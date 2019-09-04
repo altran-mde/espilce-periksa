@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Espilce Periksa Validation
+Bundle-SymbolicName: org.espilce.periksa.validation
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Altran
+Automatic-Module-Name: org.espilce.periksa
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.emf.ecore,
+ org.apache.commons.lang,
+ org.apache.log4j,
+ com.google.inject,
+ org.espilce.periksa.util,
+ org.eclipse.xtend.lib
+Export-Package: org.espilce.periksa.validation

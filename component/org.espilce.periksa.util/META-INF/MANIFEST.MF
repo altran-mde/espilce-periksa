@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Espilce Periksa Util
+Bundle-SymbolicName: org.espilce.periksa.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Altran
+Automatic-Module-Name: org.espilce.periksa.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.xtend.lib.macro,
+ org.eclipse.emf.ecore,
+ org.eclipse.jdt.annotation,
+ com.google.inject
+Export-Package: org.espilce.periksa.util

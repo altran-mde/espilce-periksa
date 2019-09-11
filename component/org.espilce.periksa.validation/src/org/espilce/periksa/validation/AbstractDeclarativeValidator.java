@@ -30,7 +30,6 @@ import org.espilce.periksa.util.Exceptions;
 import org.espilce.periksa.util.SimpleCache;
 
 import org.espilce.periksa.util.Function;
-import com.google.inject.Inject;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using {@link Check} annotation.
@@ -51,9 +50,6 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractDeclarativeValidator extends AbstractValidator implements
 		ValidationMessageAcceptor {
-
-	@Inject
-	private IssueSeveritiesProvider issueSeveritiesProvider;
 
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 
@@ -419,99 +415,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 	protected void error(String message, EObject source, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		getMessageAcceptor().acceptError(message, source, feature, index, code, issueData);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssueToState(String issueCode, String message, EStructuralFeature feature) {
-		addIssue(message, state.get().currentObject, feature, issueCode, (String[]) null);
-	}
-	
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssue(String message, EObject source, String issueCode) {
-		addIssue(message, source, null, issueCode, (String[]) null);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssue(String message, EObject source, EStructuralFeature feature, String issueCode,
-			String... issueData) {
-		addIssue(message, source, feature, INSIGNIFICANT_INDEX, issueCode, issueData);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssue(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
-			String... issueData) {
-		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
-		if (severity != null) {
-			switch (severity) {
-				case WARNING:
-					getMessageAcceptor().acceptWarning(message, source, feature, index, issueCode, issueData);
-					break;
-				case INFO:
-					getMessageAcceptor().acceptInfo(message, source, feature, index, issueCode, issueData);
-					break;
-				case ERROR:
-					getMessageAcceptor().acceptError(message, source, feature, index, issueCode, issueData);
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode){
-		addIssue(message, source, offset, length, issueCode, (String[])null);
-	}
-	
-	/**
-	 * @since 2.4
-	 */
-	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode, String... issueData) {
-		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
-		if (severity != null) {
-			switch (severity) {
-				case WARNING:
-					getMessageAcceptor().acceptWarning(message, source, offset, length, issueCode, issueData);
-					break;
-				case INFO:
-					getMessageAcceptor().acceptInfo(message, source,  offset, length, issueCode, issueData);
-					break;
-				case ERROR:
-					getMessageAcceptor().acceptError(message, source, offset, length, issueCode, issueData);
-					break;
-				default:
-					break;
-			}
-		}
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected boolean isIgnored(String issueCode) {
-		IssueSeverities severities = getIssueSeverities(getContext(), getCurrentObject());
-		return severities.isIgnored(issueCode);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	protected IssueSeverities getIssueSeverities(Map<Object, Object> context, EObject eObject) {
-		if (context.containsKey(ISSUE_SEVERITIES)) {
-			return (IssueSeverities) context.get(ISSUE_SEVERITIES);
-		}
-		IssueSeverities issueSeverities = issueSeveritiesProvider.getIssueSeverities(eObject.eResource());
-		context.put(ISSUE_SEVERITIES, issueSeverities);
-		return issueSeverities;
 	}
 
 	protected void guard(boolean guardExpression) {

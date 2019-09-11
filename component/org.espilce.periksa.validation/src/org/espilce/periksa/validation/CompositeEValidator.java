@@ -36,9 +36,6 @@ public class CompositeEValidator implements EValidator {
 	
 	private boolean useEObjectValidator = true;
 	
-	//@Inject
-	// TODO: private OperationCanceledManager operationCanceledManager;
-	
 	public static class EValidatorEqualitySupport {
 		private EValidator delegate;
 
@@ -48,9 +45,9 @@ public class CompositeEValidator implements EValidator {
 				return false;
 			EValidator otherDelegate = ((EValidatorEqualitySupport) obj).getDelegate();
 			if (otherDelegate.getClass().equals(getDelegate().getClass())) {
-				if (delegate instanceof AbstractInjectableValidator) {
-					AbstractInjectableValidator casted = (AbstractInjectableValidator) getDelegate();
-					AbstractInjectableValidator otherCasted = (AbstractInjectableValidator) otherDelegate;
+				if (delegate instanceof AbstractValidator) {
+					AbstractValidator casted = (AbstractValidator) getDelegate();
+					AbstractValidator otherCasted = (AbstractValidator) otherDelegate;
 					if (casted.isLanguageSpecific() == otherCasted.isLanguageSpecific()) {
 						if (casted.isLanguageSpecific()) {
 							return StringUtils.equals(casted.getLanguageName(), otherCasted.getLanguageName());
@@ -114,7 +111,7 @@ public class CompositeEValidator implements EValidator {
 	}
 
 	@Override
-	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) /*TODO: throws OperationCanceledError*/ {
+	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
@@ -122,16 +119,16 @@ public class CompositeEValidator implements EValidator {
 				result &= val.getDelegate().validate(eObject, diagnostics, context);
 			}
 			catch (Throwable e) {
-				//TODO: operationCanceledManager.propagateAsErrorIfCancelException(e);
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
+				throw e;
 			}
 		}
 		return result;
 	}
 
 	@Override
-	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) /*TODO: throws OperationCanceledError*/ {
+	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
@@ -139,16 +136,16 @@ public class CompositeEValidator implements EValidator {
 				result &= val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
 			catch (Throwable e) {
-				// TODO: operationCanceledManager.propagateAsErrorIfCancelException(e);
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
+				throw e;
 			}
 		}
 		return result;
 	}
 
 	@Override
-	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) /*TODO: throws OperationCanceledError*/ {
+	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
@@ -156,9 +153,9 @@ public class CompositeEValidator implements EValidator {
 				result &= val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
 			catch (Throwable e) {
-				// TODO: operationCanceledManager.propagateAsErrorIfCancelException(e);
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
+				throw e;
 			}
 		}
 		return result;
@@ -194,7 +191,6 @@ public class CompositeEValidator implements EValidator {
 	public CompositeEValidator getCopyAndClearContents() {
 		CompositeEValidator result = new CompositeEValidator();
 		result.useEObjectValidator = this.useEObjectValidator;
-		// TODO: result.operationCanceledManager = this.operationCanceledManager;
 		if (this.contents != null) {
 			result.contents = new ArrayList<>(this.contents);
 			this.contents = null;

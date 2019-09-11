@@ -1,5 +1,6 @@
 package org.espilce.periksa.test;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -22,6 +23,15 @@ public class ModelValidator extends AbstractDeclarativeValidator {
     if (_not) {
       this.warning("Name should start with a capital", 
         TestModelPackage.Literals.ENTITY__NAME);
+    }
+  }
+  
+  @Check
+  public void throwException(final Entity entity) {
+    String _name = entity.getName();
+    boolean _equals = Objects.equal("ThrowException", _name);
+    if (_equals) {
+      throw new IllegalArgumentException();
     }
   }
 }

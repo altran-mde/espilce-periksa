@@ -20,4 +20,12 @@ class ModelValidator extends AbstractDeclarativeValidator {
                 TestModelPackage.Literals.ENTITY__NAME)
         }
     }
+
+    @Check
+    def void throwException(Entity entity) {
+        if ("ThrowException" == entity.name) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 }

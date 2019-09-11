@@ -27,7 +27,14 @@ public class ValidationTest extends ATestValidator {
 		validateModel(createResource(entity));
 		assertWarningPresent(entity, null);
 	}
-	
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testThrowException() {	
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("ThrowException");
+		validateModel(createResource(entity));
+	}
+
 	private Resource createResource(EObject eObject) {
 		return new ResourceImpl() {
 			@Override

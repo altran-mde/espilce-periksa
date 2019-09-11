@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -45,17 +44,6 @@ public class CompositeEValidator implements EValidator {
 				return false;
 			EValidator otherDelegate = ((EValidatorEqualitySupport) obj).getDelegate();
 			if (otherDelegate.getClass().equals(getDelegate().getClass())) {
-				if (delegate instanceof AbstractValidator) {
-					AbstractValidator casted = (AbstractValidator) getDelegate();
-					AbstractValidator otherCasted = (AbstractValidator) otherDelegate;
-					if (casted.isLanguageSpecific() == otherCasted.isLanguageSpecific()) {
-						if (casted.isLanguageSpecific()) {
-							return StringUtils.equals(casted.getLanguageName(), otherCasted.getLanguageName());
-						}
-						return true;
-					}
-					return false;
-				}
 				return true;
 			}
 			return false;

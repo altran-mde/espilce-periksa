@@ -12,7 +12,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -32,9 +31,6 @@ public abstract class AbstractValidator implements EValidator {
 	 */
 	public static final String ISSUE_SEVERITIES = AbstractValidator.class.getCanonicalName() + ".issueSeverities";
 
-	//TODO: language name needed?
-	private String languageName;
-	
 	public void register() {
 		EValidatorRegistrar registrar = new EValidatorRegistrar();
 		Collection<EPackage> packages = new LinkedHashSet<EPackage>(getEPackages());
@@ -62,40 +58,9 @@ public abstract class AbstractValidator implements EValidator {
 
 	@Override
 	final public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return (isResponsible(context, eObject)) ? internalValidate(eObject.eClass(), eObject, diagnostics, context) : true;
+		return internalValidate(eObject.eClass(), eObject, diagnostics, context);
 	}
 
 	protected abstract boolean internalValidate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context);
-	
-	/**
-	 * If this validator is for an EPackage you want to use in multiple languages, 
-	 * this method should return false. Otherwise issues will be reported twice.
-	 */
-	public boolean isLanguageSpecific() {
-		return languageName != null;
-	}
-	
-	String getLanguageName() {
-		return languageName;
-	}
-	
-	protected boolean isResponsible(Map<Object, Object> context, EObject eObject) {
-		return !isLanguageSpecific() || StringUtils.equals(languageName, getCurrentLanguage(context, eObject));
-	}
-	
-	protected String getCurrentLanguage(Map<Object, Object> context, EObject eObject) {
-		String currentLanguage = (context != null) ? (String) context.get(CURRENT_LANGUAGE_NAME) : null;
-		if(currentLanguage == null) {
-			//TODO: language name needed?
-//			Resource resource = eObject.eResource();
-//			if(resource instanceof XtextResource) 
-//				currentLanguage = ((XtextResource) resource).getLanguageName();
-//			else 
-				currentLanguage = "";
-			if(context != null) 
-				context.put(CURRENT_LANGUAGE_NAME, currentLanguage);
-		}
-		return currentLanguage;
-	}
-	
+				
 }

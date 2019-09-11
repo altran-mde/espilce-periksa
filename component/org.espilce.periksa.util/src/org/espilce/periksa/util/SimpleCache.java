@@ -12,6 +12,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
+import java.util.function.Function;
 
 /**
  * A primitive cache implementation. The SimpleCache allows to cache 

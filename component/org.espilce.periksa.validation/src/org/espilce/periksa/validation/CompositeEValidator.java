@@ -21,14 +21,13 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.espilce.periksa.util.Exceptions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompositeEValidator implements EValidator {
 
-	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR";
-	
 	private List<EValidatorEqualitySupport> contents;
 	
 	private static final Logger logger = Logger.getLogger(CompositeEValidator.class);
@@ -109,7 +108,7 @@ public class CompositeEValidator implements EValidator {
 			catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
-				throw e;
+				Exceptions.throwUncheckedException(e);
 			}
 		}
 		return result;
@@ -126,7 +125,7 @@ public class CompositeEValidator implements EValidator {
 			catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
-				throw e;
+				Exceptions.throwUncheckedException(e);
 			}
 		}
 		return result;
@@ -143,7 +142,7 @@ public class CompositeEValidator implements EValidator {
 			catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
-				throw e;
+				Exceptions.throwUncheckedException(e);
 			}
 		}
 		return result;

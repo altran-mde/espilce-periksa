@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,8 +29,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.espilce.periksa.diagnostics.Severity;
 import org.espilce.periksa.util.Exceptions;
 import org.espilce.periksa.util.SimpleCache;
-
-import org.espilce.periksa.util.Function;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using {@link Check} annotation.

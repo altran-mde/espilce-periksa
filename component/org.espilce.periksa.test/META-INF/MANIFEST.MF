@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.espilce.commons.emf.testsupport,
  org.espilce.periksa.validation,
  org.eclipse.xtext.xbase.lib,
- org.junit
+ org.junit,
+ org.eclipse.ui
 Bundle-ActivationPolicy: lazy

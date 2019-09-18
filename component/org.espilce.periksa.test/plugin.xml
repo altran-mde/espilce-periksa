@@ -14,4 +14,8 @@
             genModel="model/testModel.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.ui.startup">
+      <startup class="org.espilce.periksa.test.Startup"/>
+   </extension>
+   
 </plugin>

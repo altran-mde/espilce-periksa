@@ -14,6 +14,14 @@ class ModelValidator extends AbstractDeclarativeValidator {
     }
     
     @Check
+    def void checkNameContainsAtLeast3Chars(Entity entity) {
+        if (entity.name.length < 3) {
+            error("Name should contain at least 3 characters", 
+                TestModelPackage.Literals.ENTITY__NAME)
+        }
+    }
+    
+    @Check
     def void checkNameStartsWithCapital(Entity entity) {
         if (!Character.isUpperCase(entity.name.charAt(0))) {
             warning("Name should start with a capital", 

@@ -21,7 +21,15 @@ public class ValidationTest extends ATestValidator {
 	}
 	
 	@Test
-	public void testCheckNameStartsWithCapital() {	
+	public void testError() {	
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("E");
+		validateModel(createResource(entity));
+		assertErrorPresent(entity, null);
+	}
+
+	@Test
+	public void testWarning() {	
 		Entity entity = TestModelFactory.eINSTANCE.createEntity();
 		entity.setName("noCapital");
 		validateModel(createResource(entity));
@@ -29,7 +37,7 @@ public class ValidationTest extends ATestValidator {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testThrowException() {	
+	public void testException() {	
 		Entity entity = TestModelFactory.eINSTANCE.createEntity();
 		entity.setName("ThrowException");
 		validateModel(createResource(entity));

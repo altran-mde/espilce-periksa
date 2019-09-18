@@ -17,6 +17,16 @@ public class ModelValidator extends AbstractDeclarativeValidator {
   }
   
   @Check
+  public void checkNameContainsAtLeast3Chars(final Entity entity) {
+    int _length = entity.getName().length();
+    boolean _lessThan = (_length < 3);
+    if (_lessThan) {
+      this.error("Name should contain at least 3 characters", 
+        TestModelPackage.Literals.ENTITY__NAME);
+    }
+  }
+  
+  @Check
   public void checkNameStartsWithCapital(final Entity entity) {
     boolean _isUpperCase = Character.isUpperCase(entity.getName().charAt(0));
     boolean _not = (!_isUpperCase);

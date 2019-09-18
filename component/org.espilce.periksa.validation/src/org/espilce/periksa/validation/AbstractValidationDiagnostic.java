@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.espilce.periksa.validation;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.espilce.periksa.util.EmfFormatter;
@@ -30,7 +30,7 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 	 * @param issueData optional user data. May not contain <code>null</code> entries.
 	 */
 	protected AbstractValidationDiagnostic(int severity, String message, EObject source, String issueCode, String... issueData) {
-		if (ArrayUtils.contains(issueData, null)) {
+		if (Arrays.asList(issueData).contains(null)) {
 			throw new NullPointerException("issueData may not contain null");
 		}
 		this.source = source;

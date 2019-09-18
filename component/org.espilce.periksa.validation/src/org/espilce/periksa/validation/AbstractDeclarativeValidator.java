@@ -457,37 +457,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, feature, index, code, issueData));
 	}
 
-	@Override
-	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
-		checkIsFromCurrentlyCheckedResource(object);
-		this.state.get().hasErrors = true;
-		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
-	}
-
-	@Override
-	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
-		checkIsFromCurrentlyCheckedResource(object);
-		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, offset, length, code, issueData));
-	}
-
-	@Override
-	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
-		checkIsFromCurrentlyCheckedResource(object);
-		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, offset, length, code, issueData));
-	}
-
 	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object,
 			EStructuralFeature feature, int index, String code, String... issueData) {
 		int diagnosticSeverity = toDiagnosticSeverity(severity);
 		Diagnostic result = new FeatureBasedDiagnostic(diagnosticSeverity, message, object, feature, index,
-				code, issueData);
-		return result;
-	}
-
-	protected Diagnostic createDiagnostic(Severity severity, String message, EObject object, int offset, int length,
-			String code, String... issueData) {
-		int diagnosticSeverity = toDiagnosticSeverity(severity);
-		Diagnostic result = new RangeBasedDiagnostic(diagnosticSeverity, message, object, offset, length,
 				code, issueData);
 		return result;
 	}

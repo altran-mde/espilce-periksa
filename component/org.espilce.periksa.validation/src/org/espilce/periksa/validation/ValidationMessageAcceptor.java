@@ -36,17 +36,6 @@ public interface ValidationMessageAcceptor {
 	void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String...issueData);
 	
 	/**
-	 * Annotate a range of the resource with an error.
-	 * @param message the error message. May not be <code>null</code>.
-	 * @param offset the absolute offset in the resource. 
-	 * @param length the length of the erroneous range.
-	 * @param code the optional issue code.
-	 * @param issueData the optional issue data.
-	 * @throws IndexOutOfBoundsException if the offset or the length is invalid.
-	 */
-	void acceptError(String message, EObject object, int offset, int length, String code, String...issueData);
-	
-	/**
 	 * Annotate an instance, a feature value, or all feature values with a warning.
 	 * @param message the warning message. May not be <code>null</code>.
 	 * @param object the object or the feature holder. May not be <code>null</code>.
@@ -57,17 +46,6 @@ public interface ValidationMessageAcceptor {
 	 * @param issueData the optional issue data.
 	 */
 	void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData);
-	
-	/**
-	 * Annotate a range of the resource with a warning.
-	 * @param message the warning message. May not be <code>null</code>.
-	 * @param offset the absolute offset in the resource. 
-	 * @param length the length of the invalid range.
-	 * @param code the optional issue code.
-	 * @param issueData the optional issue data.
-	 * @throws IndexOutOfBoundsException if the offset or the length is invalid.
-	 */
-	void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData);
 	
 	/**
 	 * Annotate an instance, a feature value, or all feature values with an info message.
@@ -81,14 +59,4 @@ public interface ValidationMessageAcceptor {
 	 */
 	void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData);
 	
-	/**
-	 * Annotate a range of the resource with an info message..
-	 * @param message the info message. May not be <code>null</code>.
-	 * @param offset the absolute offset in the resource. 
-	 * @param length the length of the annotated range.
-	 * @param code the optional issue code.
-	 * @param issueData the optional issue data.
-	 * @throws IndexOutOfBoundsException if the offset or the length is invalid.
-	 */
-	void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData);
 }

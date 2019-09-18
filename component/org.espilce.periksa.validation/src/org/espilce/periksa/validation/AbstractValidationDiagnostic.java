@@ -23,14 +23,13 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 	private final String message;
 	private final EObject source;
 	private final int severity;
-	private final CheckType checkType;
 	private final String issueCode;
 	private final String[] issueData;
 	
 	/**
 	 * @param issueData optional user data. May not contain <code>null</code> entries.
 	 */
-	protected AbstractValidationDiagnostic(int severity, String message, EObject source, CheckType checkType, String issueCode, String... issueData) {
+	protected AbstractValidationDiagnostic(int severity, String message, EObject source, String issueCode, String... issueData) {
 		if (ArrayUtils.contains(issueData, null)) {
 			throw new NullPointerException("issueData may not contain null");
 		}
@@ -38,7 +37,6 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 		this.severity = severity;
 		this.message = message;
 		this.issueCode = issueCode;
-		this.checkType = checkType;
 		this.issueData = issueData;
 	}
 	
@@ -85,10 +83,6 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 	
 	public String[] getIssueData() {
 		return issueData;
-	}
-	
-	public CheckType getCheckType() {
-		return checkType;
 	}
 	
 	@Override

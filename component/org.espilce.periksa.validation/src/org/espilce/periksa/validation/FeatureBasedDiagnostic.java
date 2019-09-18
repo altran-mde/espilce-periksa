@@ -25,8 +25,8 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 	/**
 	 * @param issueData optional user data. May not contain <code>null</code> entries.
 	 */
-	public FeatureBasedDiagnostic(int severity, String message, EObject source, EStructuralFeature feature, int index, CheckType checkType, String issueCode, String... issueData) {
-		super(severity, message, source, checkType, issueCode, issueData);
+	public FeatureBasedDiagnostic(int severity, String message, EObject source, EStructuralFeature feature, int index, String issueCode, String... issueData) {
+		super(severity, message, source, issueCode, issueData);
 		if (feature != null && source != null) {
 			if (source.eClass().getEStructuralFeature(feature.getName()) != feature) {
 				throw new IllegalArgumentException("The sources EClass '" + source.eClass().getName() + "' does not expose the feature '" + feature.getEContainingClass().getName() + "." + feature.getName() + "'");

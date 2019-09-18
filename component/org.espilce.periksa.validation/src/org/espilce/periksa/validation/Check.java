@@ -14,6 +14,4 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD})
-public @interface Check {
-	CheckType value() default CheckType.FAST;
-}
+public @interface Check {}

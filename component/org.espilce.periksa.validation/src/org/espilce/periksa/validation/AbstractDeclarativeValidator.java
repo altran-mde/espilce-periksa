@@ -103,12 +103,8 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 			if (wasNull)
 				instance.state.set(state);
 			try {
-				Check annotation = method.getAnnotation(Check.class);
-				if (!state.checkMode.shouldCheck(annotation.value()))
-					return;
 				try {
 					state.currentMethod = method;
-					state.currentCheckType = annotation.value();
 					method.setAccessible(true);
 					method.invoke(instance, state.currentObject);
 				} catch (IllegalArgumentException e) {
@@ -235,8 +231,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		public DiagnosticChain chain = null;
 		public EObject currentObject = null;
 		public Method currentMethod = null;
-		public CheckMode checkMode = null;
-		public CheckType currentCheckType = null;
 		public boolean hasErrors = false;
 		public Map<Object, Object> context;
 	}
@@ -255,10 +249,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		return state.get().chain;
 	}
 
-	protected CheckMode getCheckMode() {
-		return state.get().checkMode;
-	}
-
 	protected Map<Object, Object> getContext() {
 		return state.get().context;
 	}
@@ -275,12 +265,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 				}
 			}
 		}
-		CheckMode checkMode = CheckMode.getCheckMode(context);
 
 		State state = new State();
 		state.chain = diagnostics;
 		state.currentObject = object;
-		state.checkMode = checkMode;
 		state.context = context;
 
 		for (MethodWrapper method : methodsForType.get(object.getClass())) {
@@ -493,7 +481,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 			EStructuralFeature feature, int index, String code, String... issueData) {
 		int diagnosticSeverity = toDiagnosticSeverity(severity);
 		Diagnostic result = new FeatureBasedDiagnostic(diagnosticSeverity, message, object, feature, index,
-				state.get().currentCheckType, code, issueData);
+				code, issueData);
 		return result;
 	}
 
@@ -501,7 +489,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 			String code, String... issueData) {
 		int diagnosticSeverity = toDiagnosticSeverity(severity);
 		Diagnostic result = new RangeBasedDiagnostic(diagnosticSeverity, message, object, offset, length,
-				state.get().currentCheckType, code, issueData);
+				code, issueData);
 		return result;
 	}
 

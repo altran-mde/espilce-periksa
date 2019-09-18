@@ -22,9 +22,9 @@ public class RangeBasedDiagnostic extends AbstractValidationDiagnostic {
 	private final int offset;
 	private final int length;
 
-	protected RangeBasedDiagnostic(int severity, String message, EObject source, int offset, int length, CheckType checkType, String issueCode,
+	protected RangeBasedDiagnostic(int severity, String message, EObject source, int offset, int length, String issueCode,
 			String[] issueData) {
-		super(severity, message, source, checkType, issueCode, issueData);
+		super(severity, message, source, issueCode, issueData);
 		this.offset = offset;
 		this.length = length;
 	}

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.espilce.periksa.diagnostics;
+package org.espilce.periksa.validation;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

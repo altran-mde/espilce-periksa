@@ -25,10 +25,6 @@ import org.eclipse.emf.ecore.EValidator;
  */
 public abstract class AbstractValidator implements EValidator {
 	
-	public static final String CURRENT_LANGUAGE_NAME = AbstractValidator.class.getCanonicalName() + ".currentLanguageName";
-	/**
-	 * @since 2.4
-	 */
 	public static final String ISSUE_SEVERITIES = AbstractValidator.class.getCanonicalName() + ".issueSeverities";
 
 	public void register() {

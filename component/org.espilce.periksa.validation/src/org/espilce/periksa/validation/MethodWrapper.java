@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
-import org.espilce.periksa.util.Exceptions;
+import org.espilce.commons.emf.UncheckedExceptionWrapper;
 
 /**
  * @since 2.6
@@ -69,7 +69,7 @@ class MethodWrapper {
 	protected void handleInvocationTargetException(Throwable targetException, State state) {
 		// ignore GuardException, check is just not evaluated if guard is false
 		if (!(targetException instanceof GuardException))
-			Exceptions.throwUncheckedException(targetException);
+			UncheckedExceptionWrapper.throwUncheckedException(targetException);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package org.espilce.periksa.validation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-public class AbstractPeriksaValidator extends AbstractDeclarativeValidator {
+public abstract class AbstractPeriksaValidator extends AbstractDeclarativeValidator {
 
 	protected void info(String message, EStructuralFeature feature) {
 		info(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);

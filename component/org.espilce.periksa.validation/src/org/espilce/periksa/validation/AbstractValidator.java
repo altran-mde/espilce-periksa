@@ -38,9 +38,7 @@ public abstract class AbstractValidator implements EValidator {
 		}
 	}
 
-	protected List<EPackage> getEPackages() {
-		throw new UnsupportedOperationException("please overwrite");
-	}
+	protected abstract List<EPackage> getEPackages();
 
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {

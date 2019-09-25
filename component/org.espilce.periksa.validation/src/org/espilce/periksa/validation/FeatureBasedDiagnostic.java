@@ -44,6 +44,9 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 			result.add(feature);
 			result.add(index);
 		}
+		if(getIssueCode() != null) {
+			result.add(getIssueCode());
+		}
 		if(getIssueData() != null) {
 			result.add(getIssueData());
 		}

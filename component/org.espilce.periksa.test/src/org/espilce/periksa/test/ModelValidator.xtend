@@ -17,7 +17,7 @@ class ModelValidator extends AbstractDeclarativeValidator {
     def void checkNameContainsAtLeast3Chars(Entity entity) {
         if (entity.name.length < 3) {
             error("Name should contain at least 3 characters", 
-                TestModelPackage.Literals.ENTITY__NAME)
+                TestModelPackage.Literals.ENTITY__NAME, "code", "data")
         }
     }
     

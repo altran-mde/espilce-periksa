@@ -25,7 +25,7 @@ public class ValidationTest extends ATestValidator {
 		Entity entity = TestModelFactory.eINSTANCE.createEntity();
 		entity.setName("E");
 		validateModel(createResource(entity));
-		assertErrorPresent(entity, null);
+		assertErrorPresent(entity, "code");
 	}
 
 	@Test

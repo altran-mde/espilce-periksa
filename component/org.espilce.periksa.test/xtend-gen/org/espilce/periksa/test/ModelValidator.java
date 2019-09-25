@@ -22,7 +22,7 @@ public class ModelValidator extends AbstractDeclarativeValidator {
     boolean _lessThan = (_length < 3);
     if (_lessThan) {
       this.error("Name should contain at least 3 characters", 
-        TestModelPackage.Literals.ENTITY__NAME);
+        TestModelPackage.Literals.ENTITY__NAME, "code", "data");
     }
   }
   

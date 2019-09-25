@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.espilce.periksa.util.SimpleCache;
+import org.espilce.periksa.validation.State.StateAccess;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using {@link Check} annotation.
@@ -47,25 +48,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		ValidationMessageAcceptor {
 
 	private static final GuardException guardException = new GuardException();
-
-	public static class StateAccess {
-
-		private AbstractDeclarativeValidator validator;
-
-		private StateAccess(AbstractDeclarativeValidator validator) {
-			this.validator = validator;
-		}
-
-		public State getState() {
-			State result = validator.state.get();
-			if (result == null) {
-				result = new State();
-				validator.state.set(result);
-			}
-			return result;
-		}
-
-	}
 
 	private volatile Set<MethodWrapper> checkMethods = null;
 
@@ -148,14 +130,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 					return result;
 				}
 			});
-
-	public static class State {
-		public DiagnosticChain chain = null;
-		public EObject currentObject = null;
-		public Method currentMethod = null;
-		public boolean hasErrors = false;
-		public Map<Object, Object> context;
-	}
 
 	protected final ThreadLocal<State> state;
 

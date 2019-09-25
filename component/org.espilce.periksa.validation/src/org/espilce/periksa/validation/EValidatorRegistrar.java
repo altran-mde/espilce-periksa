@@ -1,3 +1,6 @@
+/* Copied from https://github.com/eclipse/xtext-core/blob/v2.18.0/org.eclipse.xtext/src/
+ * org/eclipse/xtext/validation/EValidatorRegistrar.java
+ */
 /*******************************************************************************
  * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials

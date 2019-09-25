@@ -1,3 +1,6 @@
+/* Copied from https://github.com/eclipse/xtext-core/blob/v2.18.0/org.eclipse.xtext/src/
+ * org/eclipse/xtext/validation/AbstractValidationDiagnostic.java
+ */
 /*******************************************************************************
  * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials

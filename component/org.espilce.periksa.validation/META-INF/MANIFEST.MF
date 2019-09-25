@@ -10,5 +10,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.apache.log4j,
  org.espilce.periksa.util,
  org.eclipse.xtend.lib,
- org.eclipse.jdt.annotation
+ org.eclipse.jdt.annotation,
+ org.espilce.commons.emf.textrenderer
 Export-Package: org.espilce.periksa.validation

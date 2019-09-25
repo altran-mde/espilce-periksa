@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.espilce.periksa.util.EmfFormatter;
+import org.espilce.commons.emf.textrenderer.EmfStringRenderer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -99,7 +99,7 @@ public abstract class AbstractValidationDiagnostic implements Diagnostic {
 		result.append("\"");
 		if (getSourceEObject() != null) {
 			result.append(" at ");
-			result.append(EmfFormatter.objPath(getSourceEObject()));
+			result.append(new EmfStringRenderer(getSourceEObject()).render());
 		}
 		return result.toString();
 	}

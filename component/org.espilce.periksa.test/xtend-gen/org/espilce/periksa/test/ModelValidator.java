@@ -6,11 +6,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelPackage;
-import org.espilce.periksa.validation.AbstractDeclarativeValidator;
+import org.espilce.periksa.validation.AbstractPeriksaValidator;
 import org.espilce.periksa.validation.Check;
 
 @SuppressWarnings("all")
-public class ModelValidator extends AbstractDeclarativeValidator {
+public class ModelValidator extends AbstractPeriksaValidator {
   @Override
   public List<EPackage> getEPackages() {
     return CollectionLiterals.<EPackage>newArrayList(TestModelPackage.eINSTANCE);

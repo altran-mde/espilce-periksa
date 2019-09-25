@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
-import org.espilce.periksa.util.SimpleCache;
 import org.espilce.periksa.validation.State.StateAccess;
 
 /**

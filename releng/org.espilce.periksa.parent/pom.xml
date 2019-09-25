@@ -28,9 +28,8 @@
 	<modules>
 		<module>../org.espilce.periksa.target</module>
 		
-		<module>../../component/org.espilce.periksa.util</module>
 		<module>../../component/org.espilce.periksa.validation</module>
-		<!--module>../../component/org.espilce.periksa.test</module-->
+		<module>../../component/org.espilce.periksa.test</module>
 
 		<module>../../component/org.espilce.periksa.feature</module>
 

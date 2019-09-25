@@ -8,7 +8,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.espilce.periksa.util;
+package org.espilce.periksa.validation;
 
 import java.util.Map;
 import java.util.WeakHashMap;

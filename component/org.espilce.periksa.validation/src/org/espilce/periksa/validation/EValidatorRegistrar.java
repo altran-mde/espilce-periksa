@@ -18,7 +18,15 @@ import org.eclipse.emf.ecore.EValidator;
  */
 public class EValidatorRegistrar {
 
-	private EValidator.Registry registry = EValidator.Registry.INSTANCE;
+	private final EValidator.Registry registry;
+	
+	public EValidatorRegistrar() {
+		 this.registry = EValidator.Registry.INSTANCE;
+	}
+	
+	public EValidatorRegistrar(EValidator.Registry registry) {
+		this.registry = registry;
+	}
 
 	public void register(EPackage ePackage, EValidator registerMe) {
 		EValidator validator = registry.getEValidator(ePackage);

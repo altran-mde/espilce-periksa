@@ -122,8 +122,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		
 		protected void handleInvocationTargetException(Throwable targetException, State state) {
 			// ignore GuardException, check is just not evaluated if guard is false
-			// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
-			if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
+			if (!(targetException instanceof GuardException))
 				Exceptions.throwUncheckedException(targetException);
 		}
 

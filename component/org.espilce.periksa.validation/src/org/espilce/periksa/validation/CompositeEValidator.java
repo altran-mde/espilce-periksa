@@ -64,21 +64,7 @@ public class CompositeEValidator implements EValidator {
 
 	protected void initDefaults() {
 		if (isUseEObjectValidator()) {
-	 		this.addValidator(new EObjectValidator(){
-				@Override
-				public boolean validate_EveryProxyResolves(EObject eObject, DiagnosticChain diagnostics,
-						Map<Object, Object> context) {
-					// don't check, we have our own implementation, which creates nicer messages
-					return true;
-				}
-				
-				@Override
-				public boolean validate_NoCircularContainment(EObject eObject, DiagnosticChain diagnostics,
-						Map<Object, Object> context) {
-					// don't check
-					return true;
-				}
-			});
+	 		this.addValidator(new EObjectValidator());
 		}
 	}
 

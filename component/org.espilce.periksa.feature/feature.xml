@@ -3,18 +3,24 @@
       id="org.espilce.periksa.feature"
       label="Espilce Periksa Feature"
       version="0.1.0.qualifier"
-      provider-name="Altran">
+      provider-name="Altran"
+      license-feature="org.eclipse.license"
+      license-feature-version="2.0.2">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+      Copyright (C) 2019 Altran Netherlands B.V.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="https://www.eclipse.org/legal/epl-2.0"> 
+      This program and the accompanying materials are made
+      available under the terms of the Eclipse Public License 2.0
+      which is available at https://www.eclipse.org/legal/epl-2.0/
+  
+      SPDX-License-Identifier: EPL-2.0
    </license>
 
    <plugin

@@ -13,9 +13,9 @@ Export-Package: org.espilce.periksa.test.testModel,
  org.espilce.periksa.test.testModel.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime,
- org.espilce.commons.emf.testsupport,
  org.espilce.periksa.validation,
  org.eclipse.xtext.xbase.lib,
  org.junit,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.espilce.periksa.testsupport
 Bundle-ActivationPolicy: lazy

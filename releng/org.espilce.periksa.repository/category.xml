@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.espilce.periksa.feature" version="0.0.0">
+      <category name="EspilcePeriksaP2"/>
+   </feature>
+   <category-def name="EspilcePeriksaP2" label="Espilce Periksa">
+      <description>
+         Espilce Periksa Features and Plug-ins
+      </description>
+   </category-def>
+   <repository-reference location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/releases/oxygen" enabled="true" />
+</site>

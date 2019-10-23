@@ -4,7 +4,9 @@ with configurePhase source
 
 location "http://ftp.snt.utwente.nl/pub/software/eclipse/tools/orbit/downloads/drops/R20180330011457/repository" {
     com.google.guava [15.0.0,15.0.1)
-    com.google.guava.source [15.0.0,15.0.1)    
+    com.google.guava.source [15.0.0,15.0.1)
+    org.apache.commons.lang3 [3.1.0,3.1.1)
+    org.apache.commons.lang3.source [3.1.0,3.1.1)    
 }
 
 location "http://ftp.snt.utwente.nl/pub/software/eclipse/releases/oxygen" {
@@ -14,7 +16,11 @@ location "http://ftp.snt.utwente.nl/pub/software/eclipse/releases/oxygen" {
 	org.eclipse.sdk.feature.group
 }
 
-location "https://nexus-p2.manatree.io/nexus/content/sites/MDEAssets/espilce-commons/0.0" {
+location "http://ftp.snt.utwente.nl/pub/software/eclipse/cbi/updates/license/" {
+    org.eclipse.license.feature.group
+}
+
+location "https://nexus-p2.manatree.io/nexus/content/sites/MDEAssets/espilce-commons/0.0" nexus-p2 {
     org.espilce.commons.emf.feature.feature.group
     org.espilce.commons.emf.textrenderer.feature.feature.group   
 }

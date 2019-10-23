@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Espilce Periksa" sequenceNumber="1571821839">
+<target name="Espilce Periksa" sequenceNumber="1571826791">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="com.google.guava" version="15.0.0.v201403281430"/>
@@ -24,7 +24,7 @@
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.espilce.commons.emf.feature.feature.group" version="0.1.0.20190925-0926"/>
       <unit id="org.espilce.commons.emf.textrenderer.feature.feature.group" version="0.1.0.20190521-1254"/>
-      <repository id="nexus-p2" location="https://nexus-p2.manatree.io/nexus/content/sites/MDEAssets/espilce-commons/0.0"/>
+      <repository id="nexus-p2" location="https://nexus-p2.manatree.io/nexus/content/sites/MDEAssets/espilce-commons/develop"/>
     </location>
   </locations>
 </target>

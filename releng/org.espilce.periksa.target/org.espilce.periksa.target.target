@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Espilce Periksa" sequenceNumber="1568817619">
+<target name="Espilce Periksa" sequenceNumber="1571819356">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="com.google.guava" version="15.0.0.v201403281430"/>
       <unit id="com.google.guava.source" version="15.0.0.v201403281430"/>
-      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository"/>
+      <repository location="http://ftp.snt.utwente.nl/pub/software/eclipse/tools/orbit/downloads/drops/R20180330011457/repository"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
       <unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
       <unit id="org.eclipse.xtend.feature.group" version="2.2.0.v201605260315"/>
       <unit id="org.eclipse.sdk.feature.group" version="4.7.3.v20180330-0919"/>
-      <repository location="http://download.eclipse.org/releases/oxygen"/>
+      <repository location="http://ftp.snt.utwente.nl/pub/software/eclipse/releases/oxygen"/>
+    </location>
+    <location includeMode="slicer" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
+      <unit id="org.espilce.commons.emf.feature.feature.group" version="0.1.0.20190925-0926"/>
+      <unit id="org.espilce.commons.emf.textrenderer.feature.feature.group" version="0.1.0.20190521-1254"/>
+      <repository location="https://nexus-p2.manatree.io/nexus/content/sites/MDEAssets/espilce-commons/0.0"/>
     </location>
   </locations>
 </target>

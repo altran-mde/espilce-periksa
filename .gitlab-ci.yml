@@ -11,6 +11,7 @@ Build maven projects:
   tags:
     - linux_docker
   script:
+    - export
     - ./scripts/build.sh $CI_COMMIT_REF_NAME $CI_COMMIT_TAG
   artifacts:
     when: always

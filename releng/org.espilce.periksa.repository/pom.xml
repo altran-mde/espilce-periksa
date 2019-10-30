@@ -42,7 +42,7 @@
 						</goals>
 						<configuration>
 						    <serverId>nexus-p2</serverId>
-							<url>${mde.p2-repos.url}/artifacts.jar</url>
+							<url>${mde.p2-repos.url}/artifacts.xml.xz</url>
 							<unpack>false</unpack>
 							<outputDirectory>${project.build.directory}/downloaded-metadata</outputDirectory>
 						</configuration>
@@ -55,7 +55,7 @@
 						</goals>
 						<configuration>
 						    <serverId>nexus-p2</serverId>
-							<url>${mde.p2-repos.url}/content.jar</url>
+							<url>${mde.p2-repos.url}/content.xml.xz</url>
 							<unpack>false</unpack>
 							<outputDirectory>${project.build.directory}/downloaded-metadata</outputDirectory>
 						</configuration>

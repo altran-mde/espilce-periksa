@@ -15,4 +15,4 @@ Build maven projects:
   artifacts:
     when: always
     paths:
-      - "component/*/*/target/*.jar"
+      - "component/*/target/*.jar"

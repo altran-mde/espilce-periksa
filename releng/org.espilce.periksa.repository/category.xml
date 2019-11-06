@@ -3,6 +3,9 @@
    <feature id="org.espilce.periksa.feature" version="0.0.0">
       <category name="EspilcePeriksaP2"/>
    </feature>
+   <feature id="org.espilce.periksa.testsupport.feature" version="0.0.0">
+      <category name="EspilcePeriksaP2"/>
+   </feature>
    <category-def name="EspilcePeriksaP2" label="Espilce Periksa">
       <description>
          Espilce Periksa Features and Plug-ins

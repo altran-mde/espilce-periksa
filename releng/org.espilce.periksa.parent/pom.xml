@@ -35,6 +35,7 @@
 		<module>../../component/org.espilce.periksa.test</module>
 
 		<module>../../component/org.espilce.periksa.feature</module>
+		<module>../../component/org.espilce.periksa.testsupport.feature</module>
 		<module>../org.espilce.periksa.repository</module>
 	</modules>
 

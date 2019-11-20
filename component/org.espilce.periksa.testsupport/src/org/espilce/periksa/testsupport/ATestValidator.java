@@ -916,7 +916,7 @@ public abstract class ATestValidator {
 			final @Nullable String errorMsg
 	) {
 		if (isValidMessage(errorMsg)) {
-			assertEquals(message, errorMsg, diagnostic.getMessage());
+			assertEquals(errorMsg, diagnostic.getMessage(), message);
 		}
 	}
 	

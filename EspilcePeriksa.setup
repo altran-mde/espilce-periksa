@@ -196,6 +196,14 @@
           key="/instance/org.eclipse.wst.xml.core/indentationSize"
           value="2"/>
     </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.xtend.core.Xtend">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.xtend.core.Xtend/outlet.DEFAULT_OUTPUT.derived"
+          value="false"/>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"

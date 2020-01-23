@@ -1,0 +1,56 @@
+// enable kbd: / menu: / btn: UI macros
+:experimental: true
+// show icons as awesome-font characters
+:icons: font
+// enable attributes in link:
+:linkattrs: true
+
+:project-name: Espilce Periksa
+:eclipse-version: 2019-12
+:setup-stream: develop
+:setup-location: https://gitlab.manatree.io/MDEAssets/espilce-periksa/raw/{setup-stream}/EspilcePeriksa.setup
+
+= pass:normal[{project-name}]
+
+This is an EMF Validator framework.
+
+TIP: Name Origin: https://en.wiktionary.org/wiki/periksa#Indonesian[Indonesian for "to carefully inspect"]
+
+Due to the fragile support of the OCL language and the limited scalability and performance, Altran needs to integrate different solutions for developing EMF Validators.
+Such validators are essential for the end-customer to verify that the DSL models created are complete and correct for the intended use.
+It is one of the cornerstones of the increased productivity to achieve by applying DSL solutions.
+
+== Development Environment
+
+To start developing for {project-name}, please perform the following steps:
+
+. Start with downloading the `Eclipse Installer` from: +
+  https://www.eclipse.org/downloads/packages/installer
+. Start the `Eclipse Installer`
+. Select the `advanced mode` +
++
+image::https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.egit.doc/help/EGit/Contributor_Guide/images/Oomph-01-advanced-mode.png[]
+. On the https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.oomph.setup.doc/html/user/wizard/DocProductPage.html[Product Page] 
+.. Select `Eclipse Platform`
+.. Product Version: `{eclipse-version}`
+.. Click btn:[Next >]
+. On the https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.oomph.setup.doc/html/user/wizard/DocProjectPage.html[Projects Page]
+.. (_One time only_) Click the image:https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.oomph.setup.doc/images/trees/DULKrP4IGs7HGSVqoXcwRFgPxZQ=.png[] icon to add the {project-name} project.
+... Catalog: `Eclipse Projects`
+... Resource URIs: `link:{setup-location}?oomph_form=b%27users/sign_in%27#/[]`
+... Click btn:[OK] +
++
+NOTE: Though using the Resource URI above is preferred, it is known that for some users the URI didn't work and they got an error: _The URI ... does not contain a valid product_.
+In this case the setup file can also be link:{setup-location}?inline=false[downloaded] and added by clicking btn:[Browse File System...].
+... Enter your Gitlab credentials when asked for
+.. Select `{project-name}` in the tree
+.. Select stream `{setup-stream}` in the table
+.. Click btn:[Next >]
+. On the https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.oomph.setup.doc/html/user/wizard/DocVariablePage.html[Variables Page]
+.. Review all variables values, especially the `Installation folder name` and `Root install folder`
+.. Click btn:[Next >]
+. On the https://help.eclipse.org/{eclipse-version}/topic/org.eclipse.oomph.setup.doc/html/user/wizard/DocConfirmationPage.html[Confirmation Page]
+.. Click btn:[Finish]
+
+Your development environment will now be prepared.
+Please accept all licenses and provide your Gitlab credentials when asked for.

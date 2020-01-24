@@ -1,5 +1,10 @@
 package org.espilce.periksa.test;
 
+import java.util.logging.Logger;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -13,12 +18,22 @@ import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.testsupport.ATestValidator;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class ValidationTest extends ATestValidator {
 
 	@BeforeClass
 	public static void registerValidator() {
-		new ModelValidator().register();
+		// Check if run as JUnit Test (requires bootstrap) or JUnit Plug-in Test
+		System.out.println(Platform.isRunning());
+		final Bundle bundle = FrameworkUtil.getBundle(ValidationTest.class);
+		if (null == bundle) {
+			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
+			new ModelValidator().register();
+		} else {
+			Platform.getLog(bundle).log(new Status(IStatus.INFO, bundle.getSymbolicName(), "ModelValidator Eclipse configuration"));
+		}
 	}
 
 	@Test

@@ -1,6 +1,6 @@
 /**
  */
-package org.espilce.periksa.test.testModel.util;
+package org.espilce.periksa.test.testModel.special.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -9,24 +9,26 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.espilce.periksa.test.testModel.*;
+import org.espilce.periksa.test.testModel.Entity;
+
+import org.espilce.periksa.test.testModel.special.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.espilce.periksa.test.testModel.TestModelPackage
+ * @see org.espilce.periksa.test.testModel.special.SpecialPackage
  * @generated
  */
-public class TestModelAdapterFactory extends AdapterFactoryImpl {
+public class SpecialAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static TestModelPackage modelPackage;
+	protected static SpecialPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +36,9 @@ public class TestModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TestModelAdapterFactory() {
+	public SpecialAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = TestModelPackage.eINSTANCE;
+			modelPackage = SpecialPackage.eINSTANCE;
 		}
 	}
 
@@ -65,7 +67,12 @@ public class TestModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TestModelSwitch<Adapter> modelSwitch = new TestModelSwitch<Adapter>() {
+	protected SpecialSwitch<Adapter> modelSwitch = new SpecialSwitch<Adapter>() {
+		@Override
+		public Adapter caseSpecialEntity(SpecialEntity object) {
+			return createSpecialEntityAdapter();
+		}
+
 		@Override
 		public Adapter caseEntity(Entity object) {
 			return createEntityAdapter();
@@ -88,6 +95,20 @@ public class TestModelAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.espilce.periksa.test.testModel.special.SpecialEntity <em>Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.espilce.periksa.test.testModel.special.SpecialEntity
+	 * @generated
+	 */
+	public Adapter createSpecialEntityAdapter() {
+		return null;
 	}
 
 	/**
@@ -116,4 +137,4 @@ public class TestModelAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //TestModelAdapterFactory
+} //SpecialAdapterFactory

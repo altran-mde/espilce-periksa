@@ -1,0 +1,23 @@
+package org.espilce.periksa.test
+
+import org.espilce.periksa.test.testModel.Entity
+import org.espilce.periksa.test.testModel.TestModelPackage
+import org.espilce.periksa.test.testModel.special.SpecialPackage
+import org.espilce.periksa.validation.Check
+
+// Extending the ModelValidator enables the Entity base class checks on SpecialEntity
+class SpecialValidator extends ModelValidator {
+    
+    override protected getEPackages() {
+        #[SpecialPackage.eINSTANCE]
+    }
+    
+    @Check
+    def void checkNameNotSpecial(Entity entity) {
+        // Note that this check will be performed for all subclasses of Entity in the SpecialPackage (i.e. SpecialEntity)
+        // It will NOT be performed for an Entity instance (in the same model instance) as the Entity EClass does not belong to the SpecialPackage
+        if (entity.name == 'SpecialName') {
+            warning("'SpecialName' should not be used as name", TestModelPackage.Literals.ENTITY__NAME)
+        }
+    }
+}

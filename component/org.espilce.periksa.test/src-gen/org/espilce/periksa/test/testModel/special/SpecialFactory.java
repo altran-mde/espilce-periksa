@@ -1,6 +1,6 @@
 /**
  */
-package org.espilce.periksa.test.testModel;
+package org.espilce.periksa.test.testModel.special;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.espilce.periksa.test.testModel.TestModelPackage
+ * @see org.espilce.periksa.test.testModel.special.SpecialPackage
  * @generated
  */
-public interface TestModelFactory extends EFactory {
+public interface SpecialFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	TestModelFactory eINSTANCE = org.espilce.periksa.test.testModel.impl.TestModelFactoryImpl.init();
+	SpecialFactory eINSTANCE = org.espilce.periksa.test.testModel.special.impl.SpecialFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Entity</em>'.
@@ -28,7 +28,7 @@ public interface TestModelFactory extends EFactory {
 	 * @return a new object of class '<em>Entity</em>'.
 	 * @generated
 	 */
-	Entity createEntity();
+	SpecialEntity createSpecialEntity();
 
 	/**
 	 * Returns the package supported by this factory.
@@ -37,6 +37,6 @@ public interface TestModelFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	TestModelPackage getTestModelPackage();
+	SpecialPackage getSpecialPackage();
 
-} //TestModelFactory
+} //SpecialFactory

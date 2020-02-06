@@ -1,6 +1,6 @@
 /**
  */
-package org.espilce.periksa.test.testModel.impl;
+package org.espilce.periksa.test.testModel.special.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -8,13 +8,13 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.espilce.periksa.test.testModel.Entity;
-import org.espilce.periksa.test.testModel.TestModelFactory;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 
-import org.espilce.periksa.test.testModel.special.SpecialPackage;
+import org.espilce.periksa.test.testModel.impl.TestModelPackageImpl;
 
-import org.espilce.periksa.test.testModel.special.impl.SpecialPackageImpl;
+import org.espilce.periksa.test.testModel.special.SpecialEntity;
+import org.espilce.periksa.test.testModel.special.SpecialFactory;
+import org.espilce.periksa.test.testModel.special.SpecialPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,13 +22,13 @@ import org.espilce.periksa.test.testModel.special.impl.SpecialPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestModelPackageImpl extends EPackageImpl implements TestModelPackage {
+public class SpecialPackageImpl extends EPackageImpl implements SpecialPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass entityEClass = null;
+	private EClass specialEntityEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -41,12 +41,12 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.espilce.periksa.test.testModel.TestModelPackage#eNS_URI
+	 * @see org.espilce.periksa.test.testModel.special.SpecialPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private TestModelPackageImpl() {
-		super(eNS_URI, TestModelFactory.eINSTANCE);
+	private SpecialPackageImpl() {
+		super(eNS_URI, SpecialFactory.eINSTANCE);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 *
-	 * <p>This method is used to initialize {@link TestModelPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link SpecialPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,38 +68,38 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static TestModelPackage init() {
+	public static SpecialPackage init() {
 		if (isInited)
-			return (TestModelPackage) EPackage.Registry.INSTANCE.getEPackage(TestModelPackage.eNS_URI);
+			return (SpecialPackage) EPackage.Registry.INSTANCE.getEPackage(SpecialPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredTestModelPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		TestModelPackageImpl theTestModelPackage = registeredTestModelPackage instanceof TestModelPackageImpl
-				? (TestModelPackageImpl) registeredTestModelPackage
-				: new TestModelPackageImpl();
+		Object registeredSpecialPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SpecialPackageImpl theSpecialPackage = registeredSpecialPackage instanceof SpecialPackageImpl
+				? (SpecialPackageImpl) registeredSpecialPackage
+				: new SpecialPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SpecialPackage.eNS_URI);
-		SpecialPackageImpl theSpecialPackage = (SpecialPackageImpl) (registeredPackage instanceof SpecialPackageImpl
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TestModelPackage.eNS_URI);
+		TestModelPackageImpl theTestModelPackage = (TestModelPackageImpl) (registeredPackage instanceof TestModelPackageImpl
 				? registeredPackage
-				: SpecialPackage.eINSTANCE);
+				: TestModelPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theTestModelPackage.createPackageContents();
 		theSpecialPackage.createPackageContents();
+		theTestModelPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theTestModelPackage.initializePackageContents();
 		theSpecialPackage.initializePackageContents();
+		theTestModelPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theTestModelPackage.freeze();
+		theSpecialPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(TestModelPackage.eNS_URI, theTestModelPackage);
-		return theTestModelPackage;
+		EPackage.Registry.INSTANCE.put(SpecialPackage.eNS_URI, theSpecialPackage);
+		return theSpecialPackage;
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getEntity() {
-		return entityEClass;
+	public EClass getSpecialEntity() {
+		return specialEntityEClass;
 	}
 
 	/**
@@ -118,8 +118,8 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getEntity_Name() {
-		return (EAttribute) entityEClass.getEStructuralFeatures().get(0);
+	public EAttribute getSpecialEntity_Description() {
+		return (EAttribute) specialEntityEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 	 * @generated
 	 */
 	@Override
-	public TestModelFactory getTestModelFactory() {
-		return (TestModelFactory) getEFactoryInstance();
+	public SpecialFactory getSpecialFactory() {
+		return (SpecialFactory) getEFactoryInstance();
 	}
 
 	/**
@@ -152,8 +152,8 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 		isCreated = true;
 
 		// Create classes and their features
-		entityEClass = createEClass(ENTITY);
-		createEAttribute(entityEClass, ENTITY__NAME);
+		specialEntityEClass = createEClass(SPECIAL_ENTITY);
+		createEAttribute(specialEntityEClass, SPECIAL_ENTITY__DESCRIPTION);
 	}
 
 	/**
@@ -181,25 +181,22 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		SpecialPackage theSpecialPackage = (SpecialPackage) EPackage.Registry.INSTANCE
-				.getEPackage(SpecialPackage.eNS_URI);
-
-		// Add subpackages
-		getESubpackages().add(theSpecialPackage);
+		TestModelPackage theTestModelPackage = (TestModelPackage) EPackage.Registry.INSTANCE
+				.getEPackage(TestModelPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		specialEntityEClass.getESuperTypes().add(theTestModelPackage.getEntity());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Create resource
-		createResource(eNS_URI);
+		initEClass(specialEntityEClass, SpecialEntity.class, "SpecialEntity", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSpecialEntity_Description(), ecorePackage.getEString(), "description", null, 0, 1,
+				SpecialEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 	}
 
-} //TestModelPackageImpl
+} //SpecialPackageImpl

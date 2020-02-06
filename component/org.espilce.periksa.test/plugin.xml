@@ -14,6 +14,14 @@
             genModel="model/testModel.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated testModel -->
+      <package
+            uri="http://www.example.org/special"
+            class="org.espilce.periksa.test.testModel.special.SpecialPackage"
+            genModel="model/testModel.genmodel"/>
+   </extension>
+
    <extension point="org.eclipse.ui.startup">
       <startup class="org.espilce.periksa.test.Startup"/>
    </extension>

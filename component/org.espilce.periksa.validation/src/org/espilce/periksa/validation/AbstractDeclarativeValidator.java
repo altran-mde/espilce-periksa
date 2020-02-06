@@ -13,12 +13,12 @@ package org.espilce.periksa.validation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -112,7 +112,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		if (superClass != null)
 			collectMethodsImpl(instance, superClass, visitedClasses, result);
 	}
-
+	
 	/**
 	 * @since 2.6
 	 */

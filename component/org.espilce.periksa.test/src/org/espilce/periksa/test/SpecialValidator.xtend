@@ -4,9 +4,11 @@ import org.espilce.periksa.test.testModel.Entity
 import org.espilce.periksa.test.testModel.TestModelPackage
 import org.espilce.periksa.test.testModel.special.SpecialPackage
 import org.espilce.periksa.validation.Check
+import org.espilce.periksa.validation.ComposedChecks
+import org.espilce.periksa.validation.AbstractPeriksaValidator
 
-// Extending the ModelValidator enables the Entity base class checks on SpecialEntity
-class SpecialValidator extends ModelValidator {
+@ComposedChecks(ModelValidator)
+class SpecialValidator extends AbstractPeriksaValidator {
     
     override protected getEPackages() {
         #[SpecialPackage.eINSTANCE]

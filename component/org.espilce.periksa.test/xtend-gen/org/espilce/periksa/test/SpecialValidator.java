@@ -9,10 +9,13 @@ import org.espilce.periksa.test.ModelValidator;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.test.testModel.special.SpecialPackage;
+import org.espilce.periksa.validation.AbstractPeriksaValidator;
 import org.espilce.periksa.validation.Check;
+import org.espilce.periksa.validation.ComposedChecks;
 
+@ComposedChecks(ModelValidator.class)
 @SuppressWarnings("all")
-public class SpecialValidator extends ModelValidator {
+public class SpecialValidator extends AbstractPeriksaValidator {
   @Override
   protected List<EPackage> getEPackages() {
     return Collections.<EPackage>unmodifiableList(CollectionLiterals.<EPackage>newArrayList(SpecialPackage.eINSTANCE));

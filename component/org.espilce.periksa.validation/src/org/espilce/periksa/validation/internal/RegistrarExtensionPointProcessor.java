@@ -18,11 +18,11 @@ import org.espilce.periksa.validation.EValidatorRegistrar;
 final class RegistrarExtensionPointProcessor {
 	private static final String EXTENSION_POINT = PluginActivator.PLUGIN_ID + ".registrar";
 
-	private static final String TAG_ABSTRACT_VALIDATOR = "AbstractValidator";
-	private static final String TAG_E_VALIDATOR = "EValidator";
-	private static final String TAG_CLASS = "class";
-	private static final String TAG_E_INSTANCE = "eINSTANCE";
-
+	private static final String ELEMENT_ABSTRACT_VALIDATOR = "AbstractValidator";
+	private static final String ELEMENT_E_VALIDATOR = "EValidator";
+	private static final String ATTR_CLASS = "class";
+	private static final String FIELD_E_INSTANCE = "eINSTANCE";
+	
 	static void registerValidators() {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IExtensionPoint point = registry.getExtensionPoint(EXTENSION_POINT);
@@ -35,26 +35,26 @@ final class RegistrarExtensionPointProcessor {
 					continue;
 				}
 				switch (validatorElement.getName()) {
-				case TAG_ABSTRACT_VALIDATOR:
+				case ELEMENT_ABSTRACT_VALIDATOR:
 					try {
 						AbstractValidator validator = AbstractValidator.class.cast(
-								validatorElement.createExecutableExtension(TAG_CLASS));
+								validatorElement.createExecutableExtension(ATTR_CLASS));
 						validator.register();
 					} catch (CoreException e) {
 						PluginActivator.getLog().log(new Status(IStatus.ERROR, PluginActivator.PLUGIN_ID, 
 								"Failed to register AbstractValidator: " + e.getMessage(), e));
 					}
 					break;
-				case TAG_E_VALIDATOR:
+				case ELEMENT_E_VALIDATOR:
 					try {
 						EValidator validator = EValidator.class.cast(
-								validatorElement.createExecutableExtension(TAG_CLASS));
+								validatorElement.createExecutableExtension(ATTR_CLASS));
 						EValidatorRegistrar registrar = new EValidatorRegistrar();
 						for (IConfigurationElement packageElement : validatorElement.getChildren("EPackage")) {
 							try {
-								String className = packageElement.getAttribute(TAG_CLASS);
+								String className = packageElement.getAttribute(ATTR_CLASS);
 								Class<?> packageClass = Class.forName(className, true, validator.getClass().getClassLoader());
-								Field field = packageClass.getField(TAG_E_INSTANCE);
+								Field field = packageClass.getField(FIELD_E_INSTANCE);
 								EPackage ePackage = EPackage.class.cast(field.get(null));
 								registrar.register(ePackage, validator);
 							} catch (ClassNotFoundException e) {

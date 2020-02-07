@@ -26,13 +26,13 @@ public class ValidationTest extends ATestValidator {
 	@BeforeClass
 	public static void registerValidator() {
 		// Check if run as JUnit Test (requires bootstrap) or JUnit Plug-in Test
-		System.out.println(Platform.isRunning());
 		final Bundle bundle = FrameworkUtil.getBundle(ValidationTest.class);
 		if (null == bundle) {
 			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
 			new ModelValidator().register();
 		} else {
 			Platform.getLog(bundle).log(new Status(IStatus.INFO, bundle.getSymbolicName(), "ModelValidator Eclipse configuration"));
+			// Registration handled by extension point org.espilce.periksa.validation.registrar
 		}
 	}
 
@@ -90,5 +90,4 @@ public class ValidationTest extends ATestValidator {
 			}
 		};
 	}
-
 }

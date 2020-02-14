@@ -31,10 +31,12 @@
 		<module>../org.espilce.periksa.target</module>
 		
 		<module>../../component/org.espilce.periksa.validation</module>
+		<module>../../component/org.espilce.periksa.validation.ui</module>
 		<module>../../component/org.espilce.periksa.testsupport</module>
 		<module>../../component/org.espilce.periksa.test</module>
 
 		<module>../../component/org.espilce.periksa.feature</module>
+		<module>../../component/org.espilce.periksa.ui.feature</module>
 		<module>../../component/org.espilce.periksa.testsupport.feature</module>
 		<module>../org.espilce.periksa.repository</module>
 	</modules>

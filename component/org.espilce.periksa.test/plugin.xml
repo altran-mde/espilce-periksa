@@ -13,9 +13,12 @@
             class="org.espilce.periksa.test.testModel.TestModelPackage"
             genModel="model/testModel.genmodel"/>
    </extension>
-
-   <extension point="org.eclipse.ui.startup">
-      <startup class="org.espilce.periksa.test.Startup"/>
+   <extension
+         point="org.espilce.periksa.validation.registrar">
+      <AbstractValidator
+            class="org.espilce.periksa.test.ModelValidator">
+      </AbstractValidator>
    </extension>
+
    
 </plugin>

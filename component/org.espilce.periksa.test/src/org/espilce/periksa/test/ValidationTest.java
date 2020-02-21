@@ -5,16 +5,11 @@ import java.util.logging.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelFactory;
 import org.espilce.periksa.test.testModel.TestModelPackage;
+import org.espilce.periksa.test.testModel.special.SpecialEntity;
+import org.espilce.periksa.test.testModel.special.SpecialFactory;
 import org.espilce.periksa.testsupport.ATestValidator;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,6 +25,7 @@ public class ValidationTest extends ATestValidator {
 		if (null == bundle) {
 			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
 			new ModelValidator().register();
+			new SpecialValidator().register();
 		} else {
 			Platform.getLog(bundle).log(new Status(IStatus.INFO, bundle.getSymbolicName(), "ModelValidator Eclipse configuration"));
 			// Registration handled by extension point org.espilce.periksa.validation.registrar
@@ -37,8 +33,24 @@ public class ValidationTest extends ATestValidator {
 	}
 
 	@Test
-	public void testError() {
+	public void testOK() {
 		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("ValidName");
+		validateModel(entity);
+		assertNoErrorsOrWarnings(entity);
+	}
+
+	@Test
+	public void testError() {
+		doTestError(TestModelFactory.eINSTANCE.createEntity());
+	}
+
+	@Test
+	public void testSpecialError() {
+		doTestError(SpecialFactory.eINSTANCE.createSpecialEntity());
+	}
+
+	private void doTestError(Entity entity) {
 		entity.setName("E");
 		validateModel(createResource(entity));
 		assertErrorPresent("Name should contain at least 3 characters", entity, TestModelPackage.Literals.ENTITY__NAME,
@@ -67,27 +79,14 @@ public class ValidationTest extends ATestValidator {
 		validateModel(createResource(entity));
 	}
 
-	private Resource createResource(EObject eObject) {
-		return new ResourceImpl() {
-			@Override
-			public EList<EObject> getContents() {
-				EList<EObject> result = new BasicEList<>();
-				result.add(eObject);
-				return result;
-			}
-
-			@Override
-			public ResourceSet getResourceSet() {
-				Resource resource = this;
-				ResourceSet resourceSet = new ResourceSetImpl() {
-					public EList<Resource> getResources() {
-						EList<Resource> result = new BasicEList<>();
-						result.add(resource);
-						return result;
-					}
-				};
-				return resourceSet;
-			}
-		};
+	@Test
+	public void testSpecialWarning() {
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("SpecialName");
+		SpecialEntity specialEntity = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity.setName("SpecialName");
+		validateModel(createResource(entity, specialEntity));
+		assertNoErrorsOrWarnings(entity);
+		assertWarningPresent("'SpecialName' should not be used as name", specialEntity);
 	}
 }

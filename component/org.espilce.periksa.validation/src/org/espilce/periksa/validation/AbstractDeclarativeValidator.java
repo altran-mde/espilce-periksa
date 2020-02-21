@@ -13,12 +13,12 @@ package org.espilce.periksa.validation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -77,7 +77,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 		while (k != null) {
 			ComposedChecks checks = k.getAnnotation(ComposedChecks.class);
 			if (checks != null) {
-				for (Class<? extends AbstractDeclarativeValidator> external : checks.validators())
+				for (Class<? extends AbstractDeclarativeValidator> external : checks.value())
 					collectMethods(null, external, visitedClasses, result);
 			}
 			k = getSuperClass(k);
@@ -102,15 +102,20 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 			Collection<MethodWrapper> result) {
 		if (!visitedClasses.add(clazz))
 			return;
+		AbstractDeclarativeValidator instanceToUse;
+		instanceToUse = instance;
+		if (instanceToUse == null) {
+			instanceToUse = newInstance(clazz);
+		}
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
-				result.add(createMethodWrapper(instance, method));
+				result.add(createMethodWrapper(instanceToUse, method));
 			}
 		}
 		Class<? extends AbstractDeclarativeValidator> superClass = getSuperClass(clazz);
 		if (superClass != null)
-			collectMethodsImpl(instance, superClass, visitedClasses, result);
+			collectMethodsImpl(instanceToUse, superClass, visitedClasses, result);
 	}
 
 	/**
@@ -118,6 +123,15 @@ public abstract class AbstractDeclarativeValidator extends AbstractValidator imp
 	 */
 	protected MethodWrapper createMethodWrapper(AbstractDeclarativeValidator instanceToUse, Method method) {
 		return new MethodWrapper(instanceToUse, method);
+	}
+
+	protected AbstractDeclarativeValidator newInstance(Class<? extends AbstractDeclarativeValidator> clazz) {
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+			throw new IllegalStateException("The class should implement a default public constructor.", e);
+		}
 	}
 
 	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(

@@ -1,6 +1,6 @@
 /**
  */
-package org.espilce.periksa.test.testModel.impl;
+package org.espilce.periksa.test.testModel.special.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.espilce.periksa.test.testModel.*;
+import org.espilce.periksa.test.testModel.special.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,24 +18,24 @@ import org.espilce.periksa.test.testModel.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFactory {
+public class SpecialFactoryImpl extends EFactoryImpl implements SpecialFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TestModelFactory init() {
+	public static SpecialFactory init() {
 		try {
-			TestModelFactory theTestModelFactory = (TestModelFactory) EPackage.Registry.INSTANCE
-					.getEFactory(TestModelPackage.eNS_URI);
-			if (theTestModelFactory != null) {
-				return theTestModelFactory;
+			SpecialFactory theSpecialFactory = (SpecialFactory) EPackage.Registry.INSTANCE
+					.getEFactory(SpecialPackage.eNS_URI);
+			if (theSpecialFactory != null) {
+				return theSpecialFactory;
 			}
 		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new TestModelFactoryImpl();
+		return new SpecialFactoryImpl();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TestModelFactoryImpl() {
+	public SpecialFactoryImpl() {
 		super();
 	}
 
@@ -56,8 +56,8 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case TestModelPackage.ENTITY:
-			return createEntity();
+		case SpecialPackage.SPECIAL_ENTITY:
+			return createSpecialEntity();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -69,9 +69,9 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	 * @generated
 	 */
 	@Override
-	public Entity createEntity() {
-		EntityImpl entity = new EntityImpl();
-		return entity;
+	public SpecialEntity createSpecialEntity() {
+		SpecialEntityImpl specialEntity = new SpecialEntityImpl();
+		return specialEntity;
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	 * @generated
 	 */
 	@Override
-	public TestModelPackage getTestModelPackage() {
-		return (TestModelPackage) getEPackage();
+	public SpecialPackage getSpecialPackage() {
+		return (SpecialPackage) getEPackage();
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	 * @generated
 	 */
 	@Deprecated
-	public static TestModelPackage getPackage() {
-		return TestModelPackage.eINSTANCE;
+	public static SpecialPackage getPackage() {
+		return SpecialPackage.eINSTANCE;
 	}
 
-} //TestModelFactoryImpl
+} //SpecialFactoryImpl

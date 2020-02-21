@@ -4,26 +4,16 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.espilce.periksa.test.ModelValidatorBase;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelPackage;
-import org.espilce.periksa.validation.AbstractPeriksaValidator;
 import org.espilce.periksa.validation.Check;
 
 @SuppressWarnings("all")
-public class ModelValidator extends AbstractPeriksaValidator {
+public class ModelValidator extends ModelValidatorBase {
   @Override
-  public List<EPackage> getEPackages() {
+  protected List<EPackage> getEPackages() {
     return CollectionLiterals.<EPackage>newArrayList(TestModelPackage.eINSTANCE);
-  }
-  
-  @Check
-  public void checkNameContainsAtLeast3Chars(final Entity entity) {
-    int _length = entity.getName().length();
-    boolean _lessThan = (_length < 3);
-    if (_lessThan) {
-      this.error("Name should contain at least 3 characters", 
-        TestModelPackage.Literals.ENTITY__NAME, "code", "data");
-    }
   }
   
   @Check

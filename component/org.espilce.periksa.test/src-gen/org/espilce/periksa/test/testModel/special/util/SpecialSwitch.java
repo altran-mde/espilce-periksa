@@ -1,13 +1,15 @@
 /**
  */
-package org.espilce.periksa.test.testModel.util;
+package org.espilce.periksa.test.testModel.special.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import org.espilce.periksa.test.testModel.*;
+import org.espilce.periksa.test.testModel.Entity;
+
+import org.espilce.periksa.test.testModel.special.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,17 +21,17 @@ import org.espilce.periksa.test.testModel.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.espilce.periksa.test.testModel.TestModelPackage
+ * @see org.espilce.periksa.test.testModel.special.SpecialPackage
  * @generated
  */
-public class TestModelSwitch<T> extends Switch<T> {
+public class SpecialSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static TestModelPackage modelPackage;
+	protected static SpecialPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +39,9 @@ public class TestModelSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TestModelSwitch() {
+	public SpecialSwitch() {
 		if (modelPackage == null) {
-			modelPackage = TestModelPackage.eINSTANCE;
+			modelPackage = SpecialPackage.eINSTANCE;
 		}
 	}
 
@@ -66,9 +68,11 @@ public class TestModelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case TestModelPackage.ENTITY: {
-			Entity entity = (Entity) theEObject;
-			T result = caseEntity(entity);
+		case SpecialPackage.SPECIAL_ENTITY: {
+			SpecialEntity specialEntity = (SpecialEntity) theEObject;
+			T result = caseSpecialEntity(specialEntity);
+			if (result == null)
+				result = caseEntity(specialEntity);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -76,6 +80,21 @@ public class TestModelSwitch<T> extends Switch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpecialEntity(SpecialEntity object) {
+		return null;
 	}
 
 	/**
@@ -109,4 +128,4 @@ public class TestModelSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //TestModelSwitch
+} //SpecialSwitch

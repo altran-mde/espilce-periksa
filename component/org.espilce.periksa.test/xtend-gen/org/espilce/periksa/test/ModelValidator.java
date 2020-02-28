@@ -1,37 +1,43 @@
 package org.espilce.periksa.test;
 
 import com.google.common.base.Objects;
-import java.util.List;
+import java.io.IOException;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.espilce.periksa.test.ModelValidatorBase;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.validation.Check;
+import org.espilce.periksa.validation.CheckContext;
+import org.espilce.periksa.validation.CheckMethod;
+import org.espilce.periksa.validation.ERegistrableValidator;
 
 @SuppressWarnings("all")
-public class ModelValidator extends ModelValidatorBase {
+public class ModelValidator extends ModelValidatorBase implements ERegistrableValidator {
   @Override
-  protected List<EPackage> getEPackages() {
+  public Iterable<EPackage> getEPackages() {
     return CollectionLiterals.<EPackage>newArrayList(TestModelPackage.eINSTANCE);
   }
   
   @Check
-  public void checkNameStartsWithCapital(final Entity entity) {
-    boolean _isUpperCase = Character.isUpperCase(entity.getName().charAt(0));
-    boolean _not = (!_isUpperCase);
-    if (_not) {
-      this.warning("Name should start with a capital", 
-        TestModelPackage.Literals.ENTITY__NAME);
+  public void throwException(final Entity entity) {
+    try {
+      String _name = entity.getName();
+      boolean _equals = Objects.equal("ThrowException", _name);
+      if (_equals) {
+        throw new IOException();
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  @Check
-  public void throwException(final Entity entity) {
-    String _name = entity.getName();
-    boolean _equals = Objects.equal("ThrowException", _name);
-    if (_equals) {
-      throw new IllegalArgumentException();
+  @Override
+  protected void handleCheckMethodInvocationException(final Throwable throwable, final CheckMethod method, final CheckContext context) {
+    if ((throwable instanceof IOException)) {
+      throw new IllegalArgumentException(throwable);
     }
+    super.handleCheckMethodInvocationException(throwable, method, context);
   }
 }

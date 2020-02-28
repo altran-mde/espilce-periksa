@@ -24,11 +24,17 @@
 
    <extension
          point="org.espilce.periksa.validation.registrar">
-      <AbstractValidator
+      <ReflectiveValidator
+            class="org.espilce.periksa.test.EntityStartsWithCapital">
+         <EPackage
+               class="org.espilce.periksa.test.testModel.TestModelPackage">
+         </EPackage>
+      </ReflectiveValidator>
+      <ERegistrableValidator
             class="org.espilce.periksa.test.ModelValidator">
-      </AbstractValidator>
-      <AbstractValidator
+      </ERegistrableValidator>
+      <ERegistrableValidator
             class="org.espilce.periksa.test.SpecialValidator">
-      </AbstractValidator>
+      </ERegistrableValidator>
    </extension>
 </plugin>

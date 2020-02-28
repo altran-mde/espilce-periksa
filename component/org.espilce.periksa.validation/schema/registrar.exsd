@@ -19,8 +19,9 @@
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
             <choice>
-               <element ref="AbstractValidator"/>
+               <element ref="ERegistrableValidator"/>
                <element ref="EValidator"/>
+               <element ref="ReflectiveValidator"/>
             </choice>
          </sequence>
          <attribute name="point" type="string" use="required">
@@ -50,7 +51,7 @@
       </complexType>
    </element>
 
-   <element name="AbstractValidator">
+   <element name="ERegistrableValidator">
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -58,7 +59,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="org.espilce.periksa.validation.AbstractValidator:"/>
+                  <meta.attribute kind="java" basedOn=":org.espilce.periksa.validation.ERegistrableValidator"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -77,6 +78,24 @@
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EValidator"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="ReflectiveValidator">
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="EPackage"/>
+         </sequence>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
                </appinfo>
             </annotation>
          </attribute>

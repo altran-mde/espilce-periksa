@@ -11,6 +11,8 @@ import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.test.testModel.special.SpecialEntity;
 import org.espilce.periksa.test.testModel.special.SpecialFactory;
 import org.espilce.periksa.testsupport.ATestValidator;
+import org.espilce.periksa.validation.DeclarativeValidator;
+import org.espilce.periksa.validation.EValidatorRegistrar;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
@@ -24,6 +26,7 @@ public class ValidationTest extends ATestValidator {
 		final Bundle bundle = FrameworkUtil.getBundle(ValidationTest.class);
 		if (null == bundle) {
 			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
+			new EValidatorRegistrar().register(TestModelPackage.eINSTANCE, DeclarativeValidator.of(EntityStartsWithCapital.class));
 			new ModelValidator().register();
 			new SpecialValidator().register();
 		} else {

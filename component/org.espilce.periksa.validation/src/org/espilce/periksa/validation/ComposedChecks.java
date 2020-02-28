@@ -24,6 +24,5 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE})
 public @interface ComposedChecks {
 
-	Class<? extends AbstractDeclarativeValidator>[] value();
-
+	Class<?>[] value();
 }

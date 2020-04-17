@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
-import org.espilce.periksa.validation.internal.CompositeValidator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +22,7 @@ public class EValidatorRegistrar {
 
 	private final EValidator.Registry registry;
 
-	private Supplier<ECompositeValidator> compositeValidatorSupplier = CompositeValidator::new;
+	private Supplier<ECompositeValidator> compositeValidatorSupplier = ECompositeValidatorImpl::new;
 	
 	/**
 	 * Registers {@link EValidator}s in the {@link EValidator.Registry#INSTANCE}.
@@ -66,5 +65,18 @@ public class EValidatorRegistrar {
 			compositeValidator.addEValidator(registerMe);
 			registry.put(ePackage, compositeValidator);
 		}
+	}
+	
+	public void unregister(EPackage ePackage, EValidator unregisterMe) {
+		EValidator validator = registry.getEValidator(ePackage);
+		if (validator == unregisterMe) {
+			registry.remove(ePackage);
+		} else if (validator instanceof ECompositeValidator) {
+			((ECompositeValidator) validator).removeValidator(unregisterMe);
+		}
+	}
+
+	public void unregister(EPackage ePackage) {
+		registry.remove(ePackage);
 	}
 }

@@ -20,6 +20,10 @@ public class PluginActivator implements BundleActivator {
 		bundleContext = null;
 	}
 	
+	public static BundleContext getBundleContext() {
+		return bundleContext;
+	}
+	
 	public static ILog getLog() {
 		return bundleContext == null ? null : Platform.getLog(bundleContext.getBundle());
 	}

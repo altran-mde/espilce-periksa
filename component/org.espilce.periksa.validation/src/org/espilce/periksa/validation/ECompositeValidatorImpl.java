@@ -1,11 +1,10 @@
-package org.espilce.periksa.validation.internal;
+package org.espilce.periksa.validation;
 
 import java.util.LinkedHashSet;
 
 import org.eclipse.emf.ecore.EValidator;
-import org.espilce.periksa.validation.ECompositeValidator;
 
-public final class CompositeValidator implements ECompositeValidator {
+public class ECompositeValidatorImpl implements ECompositeValidator {
 	private final LinkedHashSet<EValidator> validators = new LinkedHashSet<>(4);
 
 	@Override
@@ -28,6 +27,25 @@ public final class CompositeValidator implements ECompositeValidator {
 		return validators.add(validator);
 	}
 
+	public boolean removeValidator(EValidator validator) {
+		if (validators.isEmpty()) {
+			return false;
+		} else if (this == validator) {
+			// We cannot remove ourself, but we can disable ourself by removing all validators
+			validators.clear();
+			return true;
+		} else if (validator instanceof ECompositeValidator) {
+			ECompositeValidator other = (ECompositeValidator) validator;
+			boolean result = false;
+			for (EValidator eValidator : other.getEValidators()) {
+				result |= removeValidator(eValidator);
+			}
+			return result;
+		} else {
+			return validators.remove(validator);
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -44,7 +62,7 @@ public final class CompositeValidator implements ECompositeValidator {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompositeValidator other = (CompositeValidator) obj;
+		ECompositeValidatorImpl other = (ECompositeValidatorImpl) obj;
 		if (validators == null) {
 			if (other.validators != null)
 				return false;

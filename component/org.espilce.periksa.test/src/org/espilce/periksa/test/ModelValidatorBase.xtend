@@ -6,6 +6,7 @@ import org.espilce.periksa.validation.Check
 import org.espilce.periksa.validation.ContextAwareDeclarativeValidator
 
 class ModelValidatorBase extends ContextAwareDeclarativeValidator {
+    
     @Check
     def void checkNameContainsAtLeast3Chars(Entity entity) {
         if (entity.name.length < 3) {

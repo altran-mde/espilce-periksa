@@ -10,6 +10,7 @@ import org.espilce.periksa.test.testModel.TestModelFactory;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.test.testModel.special.SpecialEntity;
 import org.espilce.periksa.test.testModel.special.SpecialFactory;
+import org.espilce.periksa.test.testModel.special.SpecialPackage;
 import org.espilce.periksa.testsupport.ATestValidator;
 import org.espilce.periksa.validation.DeclarativeValidator;
 import org.espilce.periksa.validation.EValidatorRegistrar;
@@ -21,14 +22,15 @@ import org.osgi.framework.FrameworkUtil;
 public class ValidationTest extends ATestValidator {
 
 	@BeforeClass
-	public static void registerValidator() {
+	public static void registerValidators() {
 		// Check if run as JUnit Test (requires bootstrap) or JUnit Plug-in Test
 		final Bundle bundle = FrameworkUtil.getBundle(ValidationTest.class);
 		if (null == bundle) {
 			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
-			new EValidatorRegistrar().register(TestModelPackage.eINSTANCE, DeclarativeValidator.of(EntityStartsWithCapital.class));
-			new ModelValidator().register();
-			new SpecialValidator().register();
+			final EValidatorRegistrar registrar = new EValidatorRegistrar();
+			registrar.register(TestModelPackage.eINSTANCE, DeclarativeValidator.of(EntityStartsWithCapital.class));
+			registrar.register(TestModelPackage.eINSTANCE, new ModelValidator());
+			registrar.register(SpecialPackage.eINSTANCE, new SpecialValidator());
 		} else {
 			Platform.getLog(bundle).log(new Status(IStatus.INFO, bundle.getSymbolicName(), "ModelValidator Eclipse configuration"));
 			// Registration handled by extension point org.espilce.periksa.validation.registrar
@@ -39,23 +41,56 @@ public class ValidationTest extends ATestValidator {
 	public void testOK() {
 		Entity entity = TestModelFactory.eINSTANCE.createEntity();
 		entity.setName("ValidName");
-		validateModel(entity);
+		SpecialEntity specialEntity = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity.setName("ValidName");
+		validateModel(createResource(entity, specialEntity));
+		
 		assertNoErrorsOrWarnings(entity);
+		assertNoErrorsOrWarnings(specialEntity);
 	}
 
 	@Test
-	public void testError() {
-		doTestError(TestModelFactory.eINSTANCE.createEntity());
+	public void testErrorOnBaseValidator() {
+		doTestNameLengthMinimal3(TestModelFactory.eINSTANCE.createEntity());
 	}
 
 	@Test
-	public void testSpecialError() {
-		doTestError(SpecialFactory.eINSTANCE.createSpecialEntity());
+	public void testErrorViaComposedChecksOnBaseValidator() {
+		doTestNameLengthMinimal3(SpecialFactory.eINSTANCE.createSpecialEntity());
 	}
 
-	private void doTestError(Entity entity) {
+	@Test
+	public void testWarningViaReflectiveValidatorExtension() {
+		doTestNameStartsWithCapital(TestModelFactory.eINSTANCE.createEntity());
+	}
+
+	@Test
+	public void testWarningViaComposedChecks() {
+		doTestNameStartsWithCapital(SpecialFactory.eINSTANCE.createSpecialEntity());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testException() {
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("ThrowException");
+		validateModel(entity);
+	}
+
+	@Test
+	public void testPackageIsolation() {
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("SpecialName");
+		SpecialEntity specialEntity = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity.setName("SpecialName");
+		validateModel(createResource(entity, specialEntity));
+		
+		assertNoErrorsOrWarnings(entity);
+		assertWarningPresent("'SpecialName' should not be used as name", specialEntity);
+	}
+
+	private void doTestNameLengthMinimal3(Entity entity) {
 		entity.setName("E");
-		validateModel(createResource(entity));
+		validateModel(entity);
 		assertErrorPresent("Name should contain at least 3 characters", entity, TestModelPackage.Literals.ENTITY__NAME,
 				"code");
 		assertErrorPresent("Name should contain at least 3 characters", entity, TestModelPackage.Literals.ENTITY__NAME);
@@ -65,31 +100,11 @@ public class ValidationTest extends ATestValidator {
 		assertErrorPresent(entity, TestModelPackage.Literals.ENTITY__NAME, "code");
 	}
 
-	@Test
-	public void testWarning() {
-		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+	private void doTestNameStartsWithCapital(Entity entity) {
 		entity.setName("noCapital");
-		validateModel(createResource(entity));
+		validateModel(entity);
 		assertWarningPresent("Name should start with a capital", entity, TestModelPackage.Literals.ENTITY__NAME);
 		assertWarningPresent("Name should start with a capital", entity);
 		assertWarningPresent(entity, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testException() {
-		Entity entity = TestModelFactory.eINSTANCE.createEntity();
-		entity.setName("ThrowException");
-		validateModel(createResource(entity));
-	}
-
-	@Test
-	public void testSpecialWarning() {
-		Entity entity = TestModelFactory.eINSTANCE.createEntity();
-		entity.setName("SpecialName");
-		SpecialEntity specialEntity = SpecialFactory.eINSTANCE.createSpecialEntity();
-		specialEntity.setName("SpecialName");
-		validateModel(createResource(entity, specialEntity));
-		assertNoErrorsOrWarnings(entity);
-		assertWarningPresent("'SpecialName' should not be used as name", specialEntity);
 	}
 }

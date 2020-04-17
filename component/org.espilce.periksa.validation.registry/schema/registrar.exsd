@@ -18,7 +18,10 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="EValidator"/>
+            <choice>
+               <element ref="EValidator"/>
+               <element ref="ReflectiveValidator"/>
+            </choice>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -59,6 +62,29 @@
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EValidator"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="ReflectiveValidator">
+      <annotation>
+         <documentation>
+            If the provided class is an instance of org.eclipse.emf.ecore.EValidator, then this extension will behave exactly as an EValidator extension. If not, a org.espilce.periksa.validation.DeclarativeValidator will be registered for the specified EPackage elements, and the provided class will be inspected for org.espilce.periksa.validation.Check annotations.
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="EPackage"/>
+         </sequence>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java"/>
                </appinfo>
             </annotation>
          </attribute>

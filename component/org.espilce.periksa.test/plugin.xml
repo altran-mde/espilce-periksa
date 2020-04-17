@@ -23,18 +23,18 @@
    </extension>
 
    <extension
-         point="org.espilce.periksa.validation.registrar">
-      <ReflectiveValidator
-            class="org.espilce.periksa.test.EntityStartsWithCapital">
-         <EPackage
-               class="org.espilce.periksa.test.testModel.TestModelPackage">
-         </EPackage>
-      </ReflectiveValidator>
-      <ERegistrableValidator
+         point="org.espilce.periksa.validation.registry.registrar">
+      <EValidator
             class="org.espilce.periksa.test.ModelValidator">
-      </ERegistrableValidator>
-      <ERegistrableValidator
+         <EPackage
+               uri="http://www.example.org/testModel">
+         </EPackage>
+      </EValidator>
+      <EValidator
             class="org.espilce.periksa.test.SpecialValidator">
-      </ERegistrableValidator>
+         <EPackage
+               uri="http://www.example.org/special">
+         </EPackage>
+      </EValidator>
    </extension>
 </plugin>

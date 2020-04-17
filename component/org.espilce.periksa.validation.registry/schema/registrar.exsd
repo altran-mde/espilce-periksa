@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.espilce.periksa.validation" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.espilce.periksa.validation.registry" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.espilce.periksa.validation" id="registrar" name="EValidator Registrar"/>
+         <meta.schema plugin="org.espilce.periksa.validation.registry" id="registrar" name="EValidator Registrar"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -18,10 +18,7 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <choice>
-               <element ref="AbstractValidator"/>
-               <element ref="EValidator"/>
-            </choice>
+            <element ref="EValidator"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -50,25 +47,10 @@
       </complexType>
    </element>
 
-   <element name="AbstractValidator">
-      <complexType>
-         <attribute name="class" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn="org.espilce.periksa.validation.AbstractValidator:"/>
-               </appinfo>
-            </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
    <element name="EValidator">
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="EPackage"/>
+            <element ref="EPackage" minOccurs="1" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -85,14 +67,11 @@
 
    <element name="EPackage">
       <complexType>
-         <attribute name="class" type="string" use="required">
+         <attribute name="uri" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EPackage"/>
-               </appinfo>
             </annotation>
          </attribute>
       </complexType>

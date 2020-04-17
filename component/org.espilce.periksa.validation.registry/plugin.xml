@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="registrar" name="EValidator Registrar" schema="schema/registrar.exsd"/>
+   <extension
+         point="org.espilce.commons.emf.registry.epackage_registry_observer">
+      <observer
+            class="org.espilce.periksa.validation.registry.RegistrarExtensionPointProcessor">
+      </observer>
+   </extension>
+
+</plugin>

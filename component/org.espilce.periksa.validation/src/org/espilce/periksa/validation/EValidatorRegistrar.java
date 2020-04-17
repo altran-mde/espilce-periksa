@@ -42,4 +42,17 @@ public class EValidatorRegistrar {
 		registry.put(ePackage, validator);
 	}
 
+	public void unregister(EPackage ePackage, EValidator unregisterMe) {
+		EValidator validator = registry.getEValidator(ePackage);
+		if (validator == unregisterMe) {
+			registry.remove(ePackage);
+		}
+		else if (validator instanceof CompositeEValidator) {
+			((CompositeEValidator) validator).removeValidator(unregisterMe);
+		}
+	}
+
+	public void unregister(EPackage ePackage) {
+		registry.remove(ePackage);
+	}
 }

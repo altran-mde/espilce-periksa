@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Espilce Periksa Validation
-Bundle-SymbolicName: org.espilce.periksa.validation;singleton:=true
+Bundle-SymbolicName: org.espilce.periksa.validation
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Altran
 Automatic-Module-Name: org.espilce.periksa
@@ -12,7 +12,4 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.espilce.commons.emf,
  org.espilce.commons.emf.textrenderer,
  org.eclipse.core.runtime;resolution:=optional
-Export-Package: org.espilce.periksa.validation,
- org.espilce.periksa.validation.internal;x-internal:=true
-Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.espilce.periksa.validation.internal.PluginActivator
+Export-Package: org.espilce.periksa.validation

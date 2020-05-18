@@ -25,12 +25,11 @@ fi fi
 
 echo Building branch $targetBranch with profiles $profiles and update site $updateSite
 
-mvn clean install -P$profiles \
+mvn clean install --fail-at-end -P$profiles \
 	-f releng/org.espilce.periksa.parent/pom.xml \
 	-s releng/settings.xml \
 	-Dmde.reactor.maven.debug=false \
 	-Dmde.updatesite=$updateSite \
-	-Dmaven.test.failure.ignore=true \
 	-e \
 	-U
 	

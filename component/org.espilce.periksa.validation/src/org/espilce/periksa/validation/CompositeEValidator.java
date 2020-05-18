@@ -86,6 +86,21 @@ public class CompositeEValidator implements EValidator {
 		}
 	}
 
+	public void removeValidator(EValidator validator) {
+		if (this == validator)
+			// We cannot remove ourself, remove all validators instead
+			this.getContents().clear();
+		if (validator instanceof CompositeEValidator) {
+			CompositeEValidator other = (CompositeEValidator) validator;
+			for(int i = 0; i < other.getContents().size(); i++)
+				removeValidator(other.getContents().get(i).delegate);
+		} else {
+			EValidatorEqualitySupport equalitySupport = new EValidatorEqualitySupport();
+			equalitySupport.setDelegate(validator);
+			this.getContents().remove(equalitySupport);
+		}
+	}
+
 	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;

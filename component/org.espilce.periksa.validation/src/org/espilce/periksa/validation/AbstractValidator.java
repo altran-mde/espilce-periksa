@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.espilce.periksa.validation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -41,7 +42,9 @@ public abstract class AbstractValidator implements EValidator {
 		}
 	}
 
-	protected abstract List<EPackage> getEPackages();
+	protected List<EPackage> getEPackages() {
+		return new ArrayList<EPackage>();
+	}
 
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {

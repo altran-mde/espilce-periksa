@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.espilce.commons.emf.UncheckedExceptionWrapper;
 
 /**
@@ -32,11 +31,9 @@ import org.espilce.commons.emf.UncheckedExceptionWrapper;
 public class CompositeEValidator implements EValidator {
 
 	private List<EValidatorEqualitySupport> contents;
-	
+
 	private static final Logger logger = Logger.getLogger(CompositeEValidator.class);
-	
-	private boolean useEObjectValidator = true;
-	
+
 	public static class EValidatorEqualitySupport {
 		private EValidator delegate;
 
@@ -65,18 +62,12 @@ public class CompositeEValidator implements EValidator {
 		}
 	}
 
-	protected void initDefaults() {
-		if (isUseEObjectValidator()) {
-	 		this.addValidator(new EObjectValidator());
-		}
-	}
-
 	public void addValidator(EValidator validator) {
 		if (this == validator)
 			return;
 		if (validator instanceof CompositeEValidator) {
 			CompositeEValidator other = (CompositeEValidator) validator;
-			for(int i = 0; i < other.getContents().size(); i++)
+			for (int i = 0; i < other.getContents().size(); i++)
 				addValidator(other.getContents().get(i).delegate);
 		} else {
 			EValidatorEqualitySupport equalitySupport = new EValidatorEqualitySupport();
@@ -92,7 +83,7 @@ public class CompositeEValidator implements EValidator {
 			this.getContents().clear();
 		if (validator instanceof CompositeEValidator) {
 			CompositeEValidator other = (CompositeEValidator) validator;
-			for(int i = 0; i < other.getContents().size(); i++)
+			for (int i = 0; i < other.getContents().size(); i++)
 				removeValidator(other.getContents().get(i).delegate);
 		} else {
 			EValidatorEqualitySupport equalitySupport = new EValidatorEqualitySupport();
@@ -108,8 +99,7 @@ public class CompositeEValidator implements EValidator {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result &= val.getDelegate().validate(eObject, diagnostics, context);
-			}
-			catch (Throwable e) {
+			} catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
 				UncheckedExceptionWrapper.throwUncheckedException(e);
@@ -125,8 +115,7 @@ public class CompositeEValidator implements EValidator {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result &= val.getDelegate().validate(eClass, eObject, diagnostics, context);
-			}
-			catch (Throwable e) {
+			} catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
 				UncheckedExceptionWrapper.throwUncheckedException(e);
@@ -136,14 +125,14 @@ public class CompositeEValidator implements EValidator {
 	}
 
 	@Override
-	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result &= val.getDelegate().validate(eDataType, value, diagnostics, context);
-			}
-			catch (Throwable e) {
+			} catch (Throwable e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
 				UncheckedExceptionWrapper.throwUncheckedException(e);
@@ -157,31 +146,23 @@ public class CompositeEValidator implements EValidator {
 
 	}
 
-	public boolean isUseEObjectValidator() {
-		return useEObjectValidator;
-	}
-	
-	public void setUseEObjectValidator(boolean useEObjectValidator) {
-		this.useEObjectValidator = useEObjectValidator;
-	}
-
 	public List<EValidatorEqualitySupport> getContents() {
 		if (contents == null) {
-			contents = new ArrayList<EValidatorEqualitySupport>(4);
-			initDefaults();
+			contents = new ArrayList<>(4);
 		}
 		return contents;
 	}
 
 	/**
 	 * For testing purpose.
+	 * 
 	 * @noreference This method is not intended to be referenced by clients.
-	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by
+	 *             clients.
 	 * @since 2.4
 	 */
 	public CompositeEValidator getCopyAndClearContents() {
 		CompositeEValidator result = new CompositeEValidator();
-		result.useEObjectValidator = this.useEObjectValidator;
 		if (this.contents != null) {
 			result.contents = new ArrayList<>(this.contents);
 			this.contents = null;

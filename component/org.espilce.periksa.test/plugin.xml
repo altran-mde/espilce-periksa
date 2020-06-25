@@ -36,5 +36,11 @@
                uri="http://www.example.org/special">
          </EPackage>
       </EValidator>
+      <ReflectiveValidator
+            class="org.espilce.periksa.test.EntityStartsWithCapital">
+         <EPackage
+               uri="http://www.example.org/testModel">
+         </EPackage>
+      </ReflectiveValidator>
    </extension>
 </plugin>

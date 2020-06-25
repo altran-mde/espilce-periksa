@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * A diagnostic that is typically associated with a feature.
+ * 
+ * @author itemis AG - Initial contribution and API
  */
 public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 
@@ -89,7 +91,7 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 					result.append(")");
 						
 				}
-			} else if (index != ValidationMessageAcceptor.INSIGNIFICANT_INDEX) {
+			} else if (index != ValidationReporter.INSIGNIFICANT_INDEX) {
 				result.append("#").append(index);
 				List<?> list = (List<?>) getSourceEObject().eGet(feature);
 				Object value = list.get(index);

@@ -10,45 +10,70 @@
  *******************************************************************************/
 package org.espilce.periksa.validation;
 
+import java.util.function.Supplier;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Altran Netherlands B.V. - Refactoring including API updates
  */
 public class EValidatorRegistrar {
 
 	private final EValidator.Registry registry;
+
+	private Supplier<ECompositeValidator> compositeValidatorSupplier = ECompositeValidatorImpl::new;
 	
+	/**
+	 * Registers {@link EValidator}s in the {@link EValidator.Registry#INSTANCE}.
+	 */
 	public EValidatorRegistrar() {
-		 this.registry = EValidator.Registry.INSTANCE;
+		this.registry = EValidator.Registry.INSTANCE;
 	}
-	
+
+	/**
+	 * Registers {@link EValidator}s in the <tt>registry</tt>.
+	 */
 	public EValidatorRegistrar(EValidator.Registry registry) {
 		this.registry = registry;
 	}
 
-	public void register(EPackage ePackage, EValidator registerMe) {
-		EValidator validator = registry.getEValidator(ePackage);
-		if (validator == null) {
-			validator = new CompositeEValidator();
-		}
-		else if (!(validator instanceof CompositeEValidator)) {
-			CompositeEValidator newValidator = new CompositeEValidator();
-			newValidator.addValidator(validator);
-			validator = newValidator;
-		}
-		((CompositeEValidator) validator).addValidator(registerMe);
-		registry.put(ePackage, validator);
+	public void setCompositeValidatorSupplier(Supplier<ECompositeValidator> compositeValidatorSupplier) {
+		this.compositeValidatorSupplier = compositeValidatorSupplier;
 	}
-
+	
+	protected Supplier<ECompositeValidator> getCompositeValidatorSupplier() {
+		return compositeValidatorSupplier;
+	}
+	
+	/**
+	 * Registers an {@link EValidator} for an {@link EPackage}.
+	 * 
+	 * @param ePackage   the package for which <tt>registerMe</tt> should be
+	 *                   registered.
+	 * @param registerMe the validator to be registered
+	 */
+	public void register(EPackage ePackage, EValidator registerMe) {
+		final EValidator validator = registry.getEValidator(ePackage);
+		if (validator == null) {
+			registry.put(ePackage, registerMe);
+		} else if (validator instanceof ECompositeValidator) {
+			((ECompositeValidator) validator).addEValidator(registerMe);
+		} else {
+			ECompositeValidator compositeValidator = getCompositeValidatorSupplier().get();
+			compositeValidator.addEValidator(validator);
+			compositeValidator.addEValidator(registerMe);
+			registry.put(ePackage, compositeValidator);
+		}
+	}
+	
 	public void unregister(EPackage ePackage, EValidator unregisterMe) {
 		EValidator validator = registry.getEValidator(ePackage);
 		if (validator == unregisterMe) {
 			registry.remove(ePackage);
-		}
-		else if (validator instanceof CompositeEValidator) {
-			((CompositeEValidator) validator).removeValidator(unregisterMe);
+		} else if (validator instanceof ECompositeValidator) {
+			((ECompositeValidator) validator).removeValidator(unregisterMe);
 		}
 	}
 

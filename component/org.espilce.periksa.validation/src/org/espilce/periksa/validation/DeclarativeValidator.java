@@ -1,3 +1,13 @@
+/* Copied from https://github.com/eclipse/xtext-core/blob/v2.18.0/org.eclipse.xtext/src/
+ * org/eclipse/xtext/validation/AbstractDeclarativeValidator.java
+ */
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.espilce.periksa.validation;
 
 import static org.eclipse.emf.common.util.Diagnostic.ERROR;
@@ -21,6 +31,10 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 
+/**
+ * @author itemis AG - Initial contribution and API
+ * @author Altran Netherlands B.V. - Refactoring including API updates
+ */
 public class DeclarativeValidator implements EValidator {
 	private final Class<?> validatorClazz;
 	private final Supplier<?> validatorInstanceSupplier;

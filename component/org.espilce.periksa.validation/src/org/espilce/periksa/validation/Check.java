@@ -15,6 +15,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * @author itemis AG - Initial contribution and API
+ * @author Altran Netherlands B.V. - Refactoring including API updates
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD})
 public @interface Check {}

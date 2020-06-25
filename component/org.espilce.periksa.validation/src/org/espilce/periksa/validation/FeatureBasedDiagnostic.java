@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * A diagnostic that is typically associated with a feature.
+ * 
+ * @author itemis AG - Initial contribution and API
  */
 public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EValidator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Altran Netherlands B.V. - Refactoring including API updates
  */
 public class EValidatorRegistrar {
 

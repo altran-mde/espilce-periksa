@@ -1,0 +1,23 @@
+# Copyright Altran Netherlands B.V
+
+project: espilce-periksa
+language: MDE
+code_location:
+  source:
+    - .
+artifact_repository_url: "https://nexus.acidspace.nl/repository/{}/"
+
+release:
+  binaries:
+    precondition:
+      - VersionDetermined
+      - OutputDirectoryExists
+      - OutputDirectoryIsEmpty
+    parameters:
+      artifact_repository: "espilce-periksa"
+      artifact_regex: "{}\/.*"
+      artifact_source_url: "https://nexus.acidspace.nl/service/rest/v1/assets?repository=espilce-periksa"
+      artifact_target_dir: ./releng/org.espilce.periksa.repository/downloaded-repository/
+      parent_pom: releng/org.espilce.periksa.parent/pom.xml
+      publish_pom: releng/org.espilce.periksa.repository/pom.xml
+      output: ./release/binaries/

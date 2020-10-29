@@ -8,7 +8,7 @@
 :project-name: Espilce Periksa
 :eclipse-version: 2019-12
 :setup-stream: develop
-:setup-location: https://gitlab.manatree.io/MDEAssets/espilce-periksa/raw/{setup-stream}/EspilcePeriksa.setup
+:setup-location: https://gitlab.acidspace.nl/mde-assets/espilce-periksa/-/raw/{setup-stream}/EspilcePeriksaACIDSpace.setup
 
 = pass:normal[{project-name}]
 

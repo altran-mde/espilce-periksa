@@ -9,11 +9,7 @@ ACIDCLI_MDE_REPOSITORY_REMOTE_NAME="espilce-periksa"
 ACIDCLI_MDE_REPOSITORY_REMOTE_PREFIX=""
 ACIDCLI_MDE_REPOSITORY_PROJECT="${SCRIPT_DIR}/../releng/org.espilce.periksa.repository"
 
-if [ ! -z "${CI_COMMIT_REF_NAME}" ]; then
-    # TODO: Do we only want to support specific branch names for URL translation?
-    echo "${CI_JOB_NAME} from branch ${CI_COMMIT_REF_NAME}"
-    REMOTE_REPOSITORY_PATH="${ACIDCLI_MDE_REPOSITORY_REMOTE_PREFIX}${CI_COMMIT_REF_NAME}"
-elif [ ! -z "${CI_COMMIT_TAG}" ]; then
+if [ ! -z "${CI_COMMIT_TAG}" ]; then
     echo "${CI_JOB_NAME} from tag ${CI_COMMIT_TAG}"
     DOTS=${CI_COMMIT_TAG//[^.]}
     if [ ${#DOTS} == 2 ]; then
@@ -21,6 +17,10 @@ elif [ ! -z "${CI_COMMIT_TAG}" ]; then
     else
         REMOTE_REPOSITORY_PATH="${ACIDCLI_MDE_REPOSITORY_REMOTE_PREFIX}${CI_COMMIT_TAG}"
     fi
+elif [ ! -z "${CI_COMMIT_REF_NAME}" ]; then
+    # TODO: Do we only want to support specific branch names for URL translation?
+    echo "${CI_JOB_NAME} from branch ${CI_COMMIT_REF_NAME}"
+    REMOTE_REPOSITORY_PATH="${ACIDCLI_MDE_REPOSITORY_REMOTE_PREFIX}${CI_COMMIT_REF_NAME}"
 else
     echo "Local build"
     REMOTE_REPOSITORY_PATH="${ACIDCLI_MDE_REPOSITORY_REMOTE_PREFIX}${USERNAME}"

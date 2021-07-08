@@ -19,7 +19,7 @@ build:
     parameters:
       output: ./reports/build/binaries
       build_settings_path: ./settings.xml
-      build_pom_path: ./releng/org.espilce.polvi.parent/pom.xml
+      build_pom_path: ./releng/org.espilce.periksa.parent/pom.xml
 
 test:
   units:
@@ -32,7 +32,7 @@ test:
     parameters:
       output: ./reports/test/units
       test_settings_path: ./settings.xml
-      test_pom_path: ./releng/org.espilce.polvi.parent/pom.xml
+      test_pom_path: ./releng/org.espilce.periksa.parent/pom.xml
       index: test-units
 
 release:
@@ -45,5 +45,5 @@ release:
       - OutputDirectoryIsNotEmpty
     parameters:
       repository: espilce-polvi
-      repository_project: ./releng/org.espilce.polvi.repository
+      repository_project: ./releng/org.espilce.periksa.repository
       output: ./reports/release/binaries

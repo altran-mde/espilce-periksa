@@ -23,7 +23,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="oomph.setup.file.path"
-      value="EspilcePeriksaACIDSpace.setup"/>
+      value="releng/eclipse/EspilcePeriksaACIDSpace.setup"/>
   <setupTask
       xsi:type="setup.workingsets:WorkingSetTask">
     <workingSet
@@ -104,13 +104,20 @@
     <setupTask
         xsi:type="setup.p2:P2Task">
       <requirement
-          name="de.jcup.asciidoctoreditor.feature.group"/>
+          name="de.jcup.basheditor.feature.group"
+          optional="true"/>
       <requirement
-          name="de.jcup.basheditor.feature.group"/>
+          name="de.jcup.yamleditor.feature.group"
+          optional="true"/>
       <requirement
-          name="de.jcup.yamleditor.feature.group"/>
+          name="de.jcup.asciidoctoreditor.feature.group"
+          optional="true"/>
       <repository
-          url="https://dl.bintray.com/de-jcup/eclipse-plugins-collection-composite/update-site/current/"/>
+          url="https://de-jcup.github.io/update-site-eclipse-bash-editor/update-site/"/>
+      <repository
+          url="https://de-jcup.github.io/update-site-eclipse-yaml-editor/update-site/"/>
+      <repository
+          url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -276,6 +283,14 @@
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.debug.ui/Console.lowWaterMark"
             value="800000"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="org.eclipse.egit.core">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
+            value="false"/>
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"

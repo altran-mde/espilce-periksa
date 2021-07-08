@@ -123,7 +123,7 @@
           <artifactId>tycho-p2-repository-plugin</artifactId>
           <version>${tycho-version}</version>
           <configuration>
-            <repositoryName>Espilce Commons</repositoryName>
+            <repositoryName>Espilce Periksa</repositoryName>
             <!-- XZ compression is not supported by tycho-p2-extras-plugin:mirror -->
             <!-- Bug 512198 - tycho-p2-extras-plugin:publish-features-and-bundles does not update xz meta-data -->
             <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=512198 -->

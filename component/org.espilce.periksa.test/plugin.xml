@@ -37,7 +37,7 @@
          </EPackage>
       </EValidator>
       <ReflectiveValidator
-            class="org.espilce.periksa.test.EntityStartsWithCapital">
+            class="org.espilce.periksa.test.ModelValidations">
          <EPackage
                uri="http://www.example.org/testModel">
          </EPackage>

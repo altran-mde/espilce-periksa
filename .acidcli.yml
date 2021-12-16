@@ -1,6 +1,6 @@
 # Copyright Altran Netherlands B.V
 
-project: espilce-polvi
+project: espilce-periksa
 language: Java
 default_branch: "develop"
 code_location:
@@ -44,6 +44,6 @@ release:
     postcondition:
       - OutputDirectoryIsNotEmpty
     parameters:
-      repository: espilce-polvi
+      repository: espilce-periksa
       repository_project: ./releng/org.espilce.periksa.repository
       output: ./reports/release/binaries

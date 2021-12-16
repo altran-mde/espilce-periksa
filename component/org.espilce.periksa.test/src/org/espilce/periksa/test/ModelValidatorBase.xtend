@@ -13,6 +13,8 @@ import org.espilce.periksa.test.testModel.Entity
 import org.espilce.periksa.test.testModel.TestModelPackage
 import org.espilce.periksa.validation.Check
 import org.espilce.periksa.validation.ContextAwareDeclarativeValidator
+import org.espilce.periksa.validation.CheckContext
+import org.espilce.periksa.validation.ValidationLibrary
 
 class ModelValidatorBase extends ContextAwareDeclarativeValidator {
     
@@ -22,5 +24,10 @@ class ModelValidatorBase extends ContextAwareDeclarativeValidator {
             error("Name should contain at least 3 characters", 
                 TestModelPackage.Literals.ENTITY__NAME, "code", "data")
         }
+    }
+    
+    @Check
+    def void checkDuplicateName(Entity entity, CheckContext context) {
+    	ValidationLibrary::checkDuplicateValue(entity, TestModelPackage.Literals.ENTITY__NAME, context)
     }
 }

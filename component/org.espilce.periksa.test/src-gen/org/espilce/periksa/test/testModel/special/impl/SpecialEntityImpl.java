@@ -48,6 +48,15 @@ public class SpecialEntityImpl extends EntityImpl implements SpecialEntity {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * This is true if the Description attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean descriptionESet;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -85,9 +94,37 @@ public class SpecialEntityImpl extends EntityImpl implements SpecialEntity {
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
+		boolean oldDescriptionESet = descriptionESet;
+		descriptionESet = true;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SpecialPackage.SPECIAL_ENTITY__DESCRIPTION,
-					oldDescription, description));
+					oldDescription, description, !oldDescriptionESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetDescription() {
+		String oldDescription = description;
+		boolean oldDescriptionESet = descriptionESet;
+		description = DESCRIPTION_EDEFAULT;
+		descriptionESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, SpecialPackage.SPECIAL_ENTITY__DESCRIPTION,
+					oldDescription, DESCRIPTION_EDEFAULT, oldDescriptionESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetDescription() {
+		return descriptionESet;
 	}
 
 	/**
@@ -128,7 +165,7 @@ public class SpecialEntityImpl extends EntityImpl implements SpecialEntity {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case SpecialPackage.SPECIAL_ENTITY__DESCRIPTION:
-			setDescription(DESCRIPTION_EDEFAULT);
+			unsetDescription();
 			return;
 		}
 		super.eUnset(featureID);
@@ -143,7 +180,7 @@ public class SpecialEntityImpl extends EntityImpl implements SpecialEntity {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SpecialPackage.SPECIAL_ENTITY__DESCRIPTION:
-			return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			return isSetDescription();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -160,7 +197,10 @@ public class SpecialEntityImpl extends EntityImpl implements SpecialEntity {
 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (description: ");
-		result.append(description);
+		if (descriptionESet)
+			result.append(description);
+		else
+			result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

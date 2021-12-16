@@ -11,13 +11,16 @@ package org.espilce.periksa.test;
 
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.espilce.periksa.test.testModel.Entity;
+import org.espilce.periksa.test.testModel.EntityContainer;
 import org.espilce.periksa.test.testModel.TestModelPackage;
+import org.espilce.periksa.test.testModel.special.SpecialPackage;
 import org.espilce.periksa.validation.Check;
 import org.espilce.periksa.validation.CheckContext;
+import org.espilce.periksa.validation.ValidationLibrary;
 
 @SuppressWarnings("all")
-public final class EntityStartsWithCapital {
-  private EntityStartsWithCapital() {
+public final class ModelValidations {
+  private ModelValidations() {
   }
   
   @Check
@@ -27,5 +30,10 @@ public final class EntityStartsWithCapital {
     if (_not) {
       context.getReport().warning("Name should start with a capital", TestModelPackage.Literals.ENTITY__NAME);
     }
+  }
+  
+  @Check
+  public static void checkDuplicateDescription(final EntityContainer entityContainer, final CheckContext context) {
+    ValidationLibrary.checkDuplicateValue(entityContainer.getEntities(), SpecialPackage.Literals.SPECIAL_ENTITY__DESCRIPTION, context);
   }
 }

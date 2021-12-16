@@ -5,6 +5,7 @@ package org.espilce.periksa.test.testModel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,6 +94,43 @@ public interface TestModelPackage extends EPackage {
 	int ENTITY_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.espilce.periksa.test.testModel.impl.EntityContainerImpl <em>Entity Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.espilce.periksa.test.testModel.impl.EntityContainerImpl
+	 * @see org.espilce.periksa.test.testModel.impl.TestModelPackageImpl#getEntityContainer()
+	 * @generated
+	 */
+	int ENTITY_CONTAINER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Entities</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_CONTAINER__ENTITIES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Entity Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_CONTAINER_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Entity Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_CONTAINER_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.espilce.periksa.test.testModel.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,6 +150,27 @@ public interface TestModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEntity_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.espilce.periksa.test.testModel.EntityContainer <em>Entity Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entity Container</em>'.
+	 * @see org.espilce.periksa.test.testModel.EntityContainer
+	 * @generated
+	 */
+	EClass getEntityContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.espilce.periksa.test.testModel.EntityContainer#getEntities <em>Entities</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Entities</em>'.
+	 * @see org.espilce.periksa.test.testModel.EntityContainer#getEntities()
+	 * @see #getEntityContainer()
+	 * @generated
+	 */
+	EReference getEntityContainer_Entities();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -153,6 +212,24 @@ public interface TestModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.espilce.periksa.test.testModel.impl.EntityContainerImpl <em>Entity Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.espilce.periksa.test.testModel.impl.EntityContainerImpl
+		 * @see org.espilce.periksa.test.testModel.impl.TestModelPackageImpl#getEntityContainer()
+		 * @generated
+		 */
+		EClass ENTITY_CONTAINER = eINSTANCE.getEntityContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTITY_CONTAINER__ENTITIES = eINSTANCE.getEntityContainer_Entities();
 
 	}
 

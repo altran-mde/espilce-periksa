@@ -16,7 +16,7 @@ import org.espilce.periksa.validation.CheckContext
 import org.espilce.periksa.validation.ComposedChecks
 import org.espilce.periksa.validation.DeclarativeValidator
 
-@ComposedChecks(ModelValidator, EntityStartsWithCapital)
+@ComposedChecks(ModelValidator, ModelValidations)
 class SpecialValidator extends DeclarativeValidator {
     
     @Check

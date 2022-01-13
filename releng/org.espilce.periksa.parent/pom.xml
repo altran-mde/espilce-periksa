@@ -37,12 +37,14 @@
 
     <module>../../component/org.espilce.periksa.validation</module>
     <module>../../component/org.espilce.periksa.validation.registry</module>
-    <module>../../component/org.espilce.periksa.guide.developer</module>
+    <module>../../component/org.espilce.periksa.feature</module>
+
     <module>../../component/org.espilce.periksa.testsupport</module>
     <module>../../component/org.espilce.periksa.test</module>
-
-    <module>../../component/org.espilce.periksa.feature</module>
     <module>../../component/org.espilce.periksa.testsupport.feature</module>
+
+    <module>../../component/org.espilce.periksa.javadoc</module>
+    <module>../../component/org.espilce.periksa.guide.developer</module>
     <module>../../component/org.espilce.periksa.sdk</module>
     <module>../org.espilce.periksa.repository</module>
   </modules>

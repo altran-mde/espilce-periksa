@@ -1,4 +1,4 @@
-= Espilce Periksa: Developer Guide 
+= Espilce Periksa: Developer Guide
 EC Modeling & Simulation
 :description: This page contains information about the Espilce Periksa MDE Asset.
 :keywords: EMF, Documentation, MDE, Asset, Capgemini, Engineering, EC, Modeling, Simulation, Validation
@@ -7,19 +7,20 @@ EC Modeling & Simulation
 
 include::_attributes.adoc[]
 
-This document contains information about Espilce Periksa.
+
+Espilce Periksa is an EMF Validator framework.
+
+TIP: Name origin: Indonesian for "to carefully inspect"  
+
+Due to the fragile support of the OCL language and the limited scalability and performance, Altran needs to integrate different solutions for developing EMF Validators.
+Such validators are essential for the end-customer to verify that the DSL models created are complete and correct for the intended use. 
+It is one of the cornerstones of the increased productivity to achieve by applying DSL solutions.
 
 ifdef::output-html[]
 ifdef::output-site[]
 TIP: This developer guide can be downloaded as link:{source-document-name}.pdf[PDF]
 endif::output-site[]
 endif::output-html[]
-
-== Overview
-
-This document is under construction.
-
-image::{imgdir}/under_construction.png[]
 
 == Quick Reference Guide
 
@@ -76,4 +77,24 @@ The easiest way to do this is by means of an extension point that is provided by
 [[programmers-guide]]
 == Programmer's Guide
 
+Espilce Periksa provides a compositional approach to add validations to ecore model instances.
+Validations can be easily written by adding a `@Check` annotation to your validation method, as explained in more detail in section <<implementing-validations>>.
+The class that implements these `@Check` methods is called a `validator` and needs to be registered to the EMF validation framework as explained in more detail in section <<registering-validators>>.
+
 image::{imgdir}/under_construction.png[]
+
+=== Implementing validations
+
+==== POJO or extending DeclarativeValidator
+
+==== Extending ContextAwareDeclarativeValidator
+
+==== Using Xtend
+
+=== Registering validators
+
+==== Using the API
+
+TODO: Explain EValidatorRegistrar API
+
+==== Using an extension point

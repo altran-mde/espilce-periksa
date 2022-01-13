@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This pom is required by the Eclipse M2E integration -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>org.espilce.periksa.javadoc</artifactId>
+  <packaging>eclipse-plugin</packaging>
+
+  <parent>
+    <groupId>org.espilce.periksa</groupId>
+    <artifactId>org.espilce.periksa.component</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho.extras</groupId>
+        <artifactId>tycho-document-bundle-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <executions>
+          <execution>
+            <id>eclipse-javadoc</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/reference/api</outputDirectory>
+              <tocFile>${project.build.directory}/reference/api/toc.xml</tocFile>
+              <tocOptions>
+                <mainLabel>Espilce Periksa: API Reference</mainLabel>
+              </tocOptions>
+              <javadocOptions>
+                <additionalArguments>
+                  <additionalArgument>${javadoc-args}</additionalArgument>
+                  <additionalArgument>-link http://docs.oracle.com/javase/8/docs/api/</additionalArgument>
+<!--                   <additionalArgument>-linkoffline ../../${platform.api} http://help.eclipse.org/2020-06/topic/org.eclipse.platform.doc.isv/reference/api/</additionalArgument> -->
+                  <additionalArgument>-public</additionalArgument>
+                </additionalArguments>
+              </javadocOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <configuration>
+          <additionalFileSets>
+            <fileSet>
+              <directory>target/reference/api</directory>
+              <!-- Putting it in the same dir within the jar ensures us that doc will work in runtime instance and RCP -->
+              <prefix>target/reference/api/</prefix>
+            </fileSet>
+          </additionalFileSets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

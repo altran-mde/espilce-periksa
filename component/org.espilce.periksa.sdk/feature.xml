@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.espilce.periksa.sdk"
+      label="Espilce Periksa SDK"
+      version="2.0.0.qualifier"
+      provider-name="Capgemini Engineering">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.espilce.periksa.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.espilce.periksa.feature.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.espilce.periksa.testsupport.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.espilce.periksa.testsupport.feature.source"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.espilce.periksa.guide.developer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>

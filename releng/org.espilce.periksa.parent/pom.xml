@@ -43,6 +43,7 @@
 
     <module>../../component/org.espilce.periksa.feature</module>
     <module>../../component/org.espilce.periksa.testsupport.feature</module>
+    <module>../../component/org.espilce.periksa.sdk</module>
     <module>../org.espilce.periksa.repository</module>
   </modules>
 
@@ -125,6 +126,12 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-source-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+      
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-p2-repository-plugin</artifactId>

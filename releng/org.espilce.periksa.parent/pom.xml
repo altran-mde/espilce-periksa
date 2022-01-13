@@ -133,6 +133,12 @@
         </plugin>
       
         <plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-source-feature-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+
+        <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-p2-repository-plugin</artifactId>
           <version>${tycho-version}</version>
@@ -296,8 +302,97 @@
         </dependency>
       </dependencies>
     </profile>
-  </profiles>
+    
+    <!-- Plugins and features for which features do not need to be generated can -->
+    <!-- create a file called '.tycho.source.skip' in their basedir. -->
+    <!-- NOTE: This option is added to support Maven Tycho pomless builds -->
+    <profile>
+      <id>tycho-source-skip</id>
+      <activation>
+        <file>
+          <exists>${basedir}/.tycho.source.skip</exists>
+        </file>
+      </activation>
+      <properties>
+          <tycho.source.skip>true</tycho.source.skip>
+      </properties>
+    </profile>
 
-  <dependencies>
-  </dependencies>
+    <profile>
+      <id>create-plugin-source</id>
+      <activation>
+        <file>
+          <exists>${basedir}/META-INF/MANIFEST.MF</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-source-plugin</artifactId>
+            <configuration>
+              <skip>${tycho.source.skip}</skip>
+            </configuration>
+            <executions>
+              <execution>
+                <id>plugin-source</id>
+                <goals>
+                  <goal>plugin-source</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>create-feature-source</id>
+      <activation>
+        <file>
+          <exists>${basedir}/feature.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-source-feature-plugin</artifactId>
+            <configuration>
+              <skip>${tycho.source.skip}</skip>
+            </configuration>
+            <executions>
+              <execution>
+                <id>source-feature</id>
+                <goals>
+                  <goal>source-feature</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-p2-plugin</artifactId>
+            <executions>
+              <execution>
+                <!-- Don't attach P2 meta-data before 'generate-source-feature' execution -->
+                <id>default-p2-metadata-default</id>
+                <configuration>
+                  <attachP2Metadata>false</attachP2Metadata>
+                </configuration>
+              </execution>
+              <execution>
+                <!-- Attach P2 meta-data after 'generate-source-feature' execution -->
+                <id>attach-p2-metadata</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>p2-metadata</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

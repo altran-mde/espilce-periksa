@@ -88,9 +88,8 @@ pages:
   dependencies: [mde-build]
   tags:
     - linux_docker
-# TODO: Enable before merge
-#  only:
-#    - develop
+  only:
+    - develop
   script:
     - cp -R component/*/target/site/ public/
   artifacts:

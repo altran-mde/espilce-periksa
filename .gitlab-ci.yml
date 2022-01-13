@@ -37,6 +37,8 @@ mde-build:
       # These outputs should be used as input in other build stages
       # P2 repository
       - 'releng/*/target/repository/*'
+      # Documentation
+      - 'component/*/target/site'
     expire_in: 1 week
 
 mde-unit-test:
@@ -79,3 +81,20 @@ mde-release:
     paths:
       - reports/release/binaries
     expire_in: 4 weeks
+    
+pages:
+  stage: publish
+  # Pages needs the artifacts from mvn-build
+  dependencies: [mde-build]
+  tags:
+    - linux_docker
+# TODO: Enable before merge
+#  only:
+#    - develop
+  script:
+    - cp -R component/*/target/site/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+    

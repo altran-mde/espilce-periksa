@@ -24,6 +24,12 @@
     <systemProperties></systemProperties>
     <tycho.testArgLine></tycho.testArgLine>
 
+    <!-- Asciidoctor settings -->    
+    <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
+    <asciidoctorj.version>2.5.2</asciidoctorj.version>
+    <asciidoctorj.pdf.version>1.6.0</asciidoctorj.pdf.version>
+    <asciidoctorj.diagram.version>2.2.1</asciidoctorj.diagram.version>
+    <jruby.version>9.3.2.0</jruby.version>
   </properties>
 
   <modules>
@@ -31,6 +37,7 @@
 
     <module>../../component/org.espilce.periksa.validation</module>
     <module>../../component/org.espilce.periksa.validation.registry</module>
+    <module>../../component/org.espilce.periksa.guide.developer</module>
     <module>../../component/org.espilce.periksa.testsupport</module>
     <module>../../component/org.espilce.periksa.test</module>
 
@@ -129,6 +136,48 @@
             <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=512198 -->
             <xzCompress>false</xzCompress>
           </configuration>
+        </plugin>
+        
+        <plugin>
+          <groupId>org.asciidoctor</groupId>
+          <artifactId>asciidoctor-maven-plugin</artifactId>
+          <version>${asciidoctor.maven.plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.jruby</groupId>
+              <artifactId>jruby-complete</artifactId>
+              <version>${jruby.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctorj</artifactId>
+              <version>${asciidoctorj.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctorj-pdf</artifactId>
+              <version>${asciidoctorj.pdf.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctorj-diagram</artifactId>
+              <version>${asciidoctorj.diagram.version}</version>
+            </dependency>
+          </dependencies>
+
+          <configuration>
+            <requires>
+              <require>asciidoctor-diagram</require>
+            </requires>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <!-- This plugin is manually deployed in the mde-assets-release repository, original content: -->
+          <!-- https://github.com/bsi-software/geneclipsetoc/tree/mvn-repo/com/bsiag/geneclipsetoc/geneclipsetoc-maven-plugin/1.0.3 -->
+          <groupId>com.bsiag.geneclipsetoc</groupId>
+          <artifactId>geneclipsetoc-maven-plugin</artifactId>
+          <version>1.0.3</version>
         </plugin>
       </plugins>
     </pluginManagement>

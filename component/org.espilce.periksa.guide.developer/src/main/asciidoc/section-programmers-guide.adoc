@@ -13,13 +13,21 @@ image::{imgdir}/under_construction.png[]
 
 === Implementing validations
 
-Espilce Periksa provides a `ValidationLibrary` containing reusable validations, e.g. validating duplicates in feature values, see its link:{javadoc-location}/org/espilce/periksa/validation/ValidationLibrary.html[javadoc]
+The `@Check` annotation provides a declarative and compositional approach to add validations to ecore model instances.
 
-==== POJO or extending DeclarativeValidator
+The `@ComposedChecks` annotation allows to modularize the validator into multiple classes.
 
-==== Extending ContextAwareDeclarativeValidator
+TIP: Espilce Periksa provides a `ValidationLibrary` containing reusable validations, e.g. validating duplicates in feature values, see its link:{javadoc-location}/org/espilce/periksa/validation/ValidationLibrary.html[javadoc]
 
-==== Using Xtend
+==== Using the @Check annotation
+
+.POJO or extending DeclarativeValidator
+
+.Extending ContextAwareDeclarativeValidator
+
+.Using Xtend
+
+==== Using the @ComposedChecks annotation
 
 === Registering validators
 

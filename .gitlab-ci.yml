@@ -38,7 +38,8 @@ mde-build:
       # P2 repository
       - 'releng/*/target/repository/*'
       # Documentation
-      - 'component/*/target/site'
+      - 'component/org.espilce.periksa.guide.developer/target/site'
+      - 'component/org.espilce.periksa.javadoc/target/reference/api'
     expire_in: 1 week
 
 mde-unit-test:
@@ -92,7 +93,8 @@ pages:
 #  only:
 #    - develop
   script:
-    - cp -R component/*/target/site/ public/
+    - cp -R component/org.espilce.periksa.guide.developer/target/site public/
+    - cp -R component/org.espilce.periksa.javadoc/target/reference/api public/api/
   artifacts:
     paths:
       - public

@@ -22,79 +22,10 @@ TIP: This developer guide can be downloaded as link:{source-document-name}.pdf[P
 endif::output-site[]
 endif::output-html[]
 
-== Quick Reference Guide
+<<<
 
-The quickest way to create validations using Espilce Periksa is to create a class containing static methods that are annotated with the `@Check` annotation.
-The first argument of the method is the model element to validate and the second argument injects the validation context as provided by Espilce Periksa.
-For more information, please read the <<programmers-guide>>. +
-The example below adds a duplicate value error-validation for command names to the Fowler state-machine DSL Xtext example, and an info-validation for state names to start with a capital.
+include::section-quick-reference-guide.adoc[]
 
-NOTE: Using the `@Check` annotation requires a bundle dependency of `org.espilce.periksa.validation`.
+<<<
 
-.Writing validations using Espilce Periksa
-[source,java]
-----
-package validations; 
-
-public class StatemachineValidations {
-	@Check // <1>
-	public static void checkDuplicates(Statemachine statemachine, CheckContext context) {
-		ValidationLibrary.checkDuplicateValue(statemachine.getCommands(), StatemachinePackage.Literals.COMMAND__NAME, context); // <2>
-	}
-
-	@Check
-	public static void checkNameStartsWithCapital(State state, CheckContext context) {
-		if (!state.getName().isEmpty() && state.getName().charAt(0) != Character.toUpperCase(state.getName().charAt(0))) {
-			context.getReport().info("Name should start with upper case", StatemachinePackage.Literals.STATE__NAME); // <3>
-		}
-	}
-}
-----
-
-<1> The `@Check` annotation registers the method to validate all instances of `Statemachine` as per the first argument of the method. The method is invoked for each `statemachine` instance in the model.
-<2> Espilce Periksa provides a `ValidationLibrary` containing reusable validations, e.g. validating duplicates in feature values.
-<3> The API of Espilce Periksa allows to easily report an `info`, `warning` or `error`.
-
-Then you need to register your model validations, such that they will be automatically invoked as part of validating each applicable model instance.
-The easiest way to do this is by means of an extension point that is provided by Espilce Periksa, as per the example below.
-
-.Registering validations in plugin.xml
-[source,xml]
-----
-<plugin>
-   <extension
-         point="org.espilce.periksa.validation.registry.registrar">
-      <ReflectiveValidator
-            class="validations.StatemachineValidations">
-         <EPackage
-               uri="http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine">
-         </EPackage>
-      </ReflectiveValidator>
-   </extension>
-</plugin>
-----
-
-[[programmers-guide]]
-== Programmer's Guide
-
-Espilce Periksa provides a compositional approach to add validations to ecore model instances.
-Validations can be easily written by adding a `@Check` annotation to your validation method, as explained in more detail in section <<implementing-validations>>.
-The class that implements these `@Check` methods is called a `validator` and needs to be registered to the EMF validation framework as explained in more detail in section <<registering-validators>>.
-
-image::{imgdir}/under_construction.png[]
-
-=== Implementing validations
-
-==== POJO or extending DeclarativeValidator
-
-==== Extending ContextAwareDeclarativeValidator
-
-==== Using Xtend
-
-=== Registering validators
-
-==== Using the API
-
-TODO: Explain EValidatorRegistrar API
-
-==== Using an extension point
+include::section-programmers-guide.adoc[]

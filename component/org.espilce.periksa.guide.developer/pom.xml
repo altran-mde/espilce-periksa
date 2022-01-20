@@ -63,7 +63,7 @@
                 <!-- Attributes for HTML in this project -->
                 <resdir>.</resdir>
                 <imgdir-gen>./images</imgdir-gen>
-                <eclipse-help-location>/help/topic</eclipse-help-location>
+                <javadoc-location>/help/topic/org.espilce.periksa.javadoc/target/site/api</javadoc-location>
                 <!-- Using a cleaner skin, see https://github.com/darshandsoni/asciidoctor-skins#usage -->
                 <!-- TODO1: Create/find a nice style-sheet that matches the default Eclipse help style -->
                 <stylesdir>${project.basedir}/src/main/stylesheet</stylesdir>
@@ -98,6 +98,7 @@
                 <!-- Attributes for HTML in this project -->
                 <resdir>.</resdir>
                 <imgdir-gen>./images</imgdir-gen>
+                <javadoc-location>api</javadoc-location>
                 <!-- Using a cleaner skin, see https://github.com/darshandsoni/asciidoctor-skins#usage -->
                 <stylesdir>${project.basedir}/src/main/stylesheet</stylesdir>
                 <stylesheet>adoc-foundation.css</stylesheet>
@@ -128,6 +129,7 @@
                 <!-- Attributes for all PDFs in this project -->
                 <resdir>${project.basedir}/src/main/resources</resdir>
                 <imgdir-gen>${project.build.directory}/generated-images</imgdir-gen>
+                <javadoc-location>https://ec-mde.pages.acidspace.nl/espilce-periksa/api</javadoc-location>
                 <!-- These output properties may help you to make parts of the documentation conditional -->
                 <output-pdf/>
                 <output-site/>

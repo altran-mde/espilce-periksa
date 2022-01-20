@@ -27,8 +27,8 @@
               <goal>javadoc</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.directory}/reference/api</outputDirectory>
-              <tocFile>${project.build.directory}/reference/api/toc.xml</tocFile>
+              <outputDirectory>${project.build.directory}/site/api</outputDirectory>
+              <tocFile>${project.build.directory}/toc.xml</tocFile>
               <tocOptions>
                 <mainLabel>Espilce Periksa: API Reference</mainLabel>
               </tocOptions>
@@ -51,9 +51,17 @@
         <configuration>
           <additionalFileSets>
             <fileSet>
-              <directory>target/reference/api</directory>
+              <directory>target/site/api</directory>
               <!-- Putting it in the same dir within the jar ensures us that doc will work in runtime instance and RCP -->
-              <prefix>target/reference/api/</prefix>
+              <prefix>target/site/api/</prefix>
+            </fileSet>
+            <fileSet>
+              <directory>target</directory>
+              <!-- Putting it in the same dir within the jar ensures us that doc will work in runtime instance and RCP -->
+              <prefix>target/</prefix>
+              <includes>
+                <include>toc.xml</include>
+              </includes>
             </fileSet>
           </additionalFileSets>
         </configuration>

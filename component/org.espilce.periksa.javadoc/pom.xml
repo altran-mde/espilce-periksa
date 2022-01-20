@@ -34,9 +34,8 @@
               </tocOptions>
               <javadocOptions>
                 <additionalArguments>
-                  <additionalArgument>${javadoc-args}</additionalArgument>
-                  <additionalArgument>-link http://docs.oracle.com/javase/8/docs/api/</additionalArgument>
-<!--                   <additionalArgument>-linkoffline ../../${platform.api} http://help.eclipse.org/2020-06/topic/org.eclipse.platform.doc.isv/reference/api/</additionalArgument> -->
+                  <additionalArgument>-link https://docs.oracle.com/javase/8/docs/api/</additionalArgument>
+                  <additionalArgument>-link https://download.eclipse.org/modeling/emf/emf/javadoc/2.11/</additionalArgument>
                   <additionalArgument>-public</additionalArgument>
                 </additionalArguments>
               </javadocOptions>

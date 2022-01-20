@@ -14,8 +14,16 @@ import java.lang.reflect.Method;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EValidator;
 
 /**
+ * Base class for {@link EValidator} that defines validations by means of
+ * implementing methods that are annotated with the {@link Check} annotation.
+ * While invoking an annotated validation method, the model element that is
+ * currently validated is known as the {@link #getContext() context} and
+ * therefore may be omitted as method parameter. This makes writing validations
+ * even more convenient.
+ * 
  * @author itemis AG - Initial contribution and API
  * @author Altran Netherlands B.V. - Refactoring including API updates
  */

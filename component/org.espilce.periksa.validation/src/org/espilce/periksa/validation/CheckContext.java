@@ -85,7 +85,7 @@ public class CheckContext {
 		}
 	};
 
-	public CheckContext(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> validationContext) {
+	protected CheckContext(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> validationContext) {
 		this.eObject = eObject;
 		this.diagnostics = diagnostics;
 		this.validationContext = validationContext;

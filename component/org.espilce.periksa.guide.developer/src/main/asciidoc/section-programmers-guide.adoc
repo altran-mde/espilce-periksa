@@ -21,11 +21,11 @@ TIP: Espilce Periksa provides a `ValidationLibrary` containing reusable validati
 
 ==== Using the @Check annotation
 
-.POJO or extending DeclarativeValidator
+POJO or extending DeclarativeValidator
 
-.Extending ContextAwareDeclarativeValidator
+Extending ContextAwareDeclarativeValidator
 
-.Using Xtend
+Using Xtend
 
 ==== Using the @ComposedChecks annotation
 

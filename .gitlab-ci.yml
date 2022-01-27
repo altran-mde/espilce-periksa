@@ -70,9 +70,10 @@ mde-release:
   stage: release
   # MDE release needs the artifacts from mde-build to be deployed
   dependencies: [mde-build]
-  only:
-    - develop
-    - tags
+# TODO: Enable before merge to develop!
+#  only:
+#    - develop
+#    - tags
   tags:
     - linux_docker
   script:

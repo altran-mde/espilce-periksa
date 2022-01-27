@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 
 /**
- * Base class for {@link EValidator} that defines validations by means of
+ * Preferred base class for {@link EValidator} that defines validations by means of
  * implementing methods that are annotated with the {@link Check} annotation.
  * While invoking an annotated validation method, the model element that is
  * currently validated is known as the {@link #getContext() context} and

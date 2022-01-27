@@ -63,7 +63,7 @@
                 <!-- Attributes for HTML in this project -->
                 <resdir>.</resdir>
                 <imgdir-gen>./images</imgdir-gen>
-                <javadoc-location>/help/topic/org.espilce.periksa.javadoc/target/site/api</javadoc-location>
+                <javadoc-location>/help/topic/org.espilce.periksa.javadoc/target/reference/api</javadoc-location>
                 <!-- Using a cleaner skin, see https://github.com/darshandsoni/asciidoctor-skins#usage -->
                 <!-- TODO1: Create/find a nice style-sheet that matches the default Eclipse help style -->
                 <stylesdir>${project.basedir}/src/main/stylesheet</stylesdir>

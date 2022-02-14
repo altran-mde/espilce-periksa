@@ -70,10 +70,9 @@ mde-release:
   stage: release
   # MDE release needs the artifacts from mde-build to be deployed
   dependencies: [mde-build]
-# TODO: Enable before merge to develop!
-#  only:
-#    - develop
-#    - tags
+  only:
+    - develop
+    - tags
   tags:
     - linux_docker
   script:
@@ -90,9 +89,8 @@ pages:
   dependencies: [mde-build]
   tags:
     - linux_docker
-# TODO: Enable before merge to develop!
-#  only:
-#    - develop
+  only:
+    - develop
   script:
     - cp -R component/org.espilce.periksa.guide.developer/target/site public/
     - cp -R component/org.espilce.periksa.javadoc/target/reference/api public/api/

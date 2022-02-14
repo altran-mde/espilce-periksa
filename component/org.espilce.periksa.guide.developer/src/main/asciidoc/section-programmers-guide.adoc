@@ -1,0 +1,38 @@
+include::_attributes.adoc[]
+
+[[programmers-guide]]
+== Programmer's Guide
+
+Espilce Periksa provides a compositional approach to add validations to ecore model instances.
+Validations can be easily written by adding a `@Check` annotation to your validation method, as explained in more detail in section <<implementing-validations>>.
+The class that implements these `@Check` methods is called a `validator` and needs to be registered to the EMF validation framework as explained in more detail in section <<registering-validators>>.
+
+TIP: Espilce Periksa provides link:{javadoc-location}/index.html[javadoc^] for its reference API.
+
+image::{imgdir}/under_construction.png[]
+
+=== Implementing validations
+
+The `@Check` annotation provides a declarative and compositional approach to add validations to ecore model instances.
+
+The `@ComposedChecks` annotation allows to modularize the validator into multiple classes.
+
+TIP: Espilce Periksa provides a `ValidationLibrary` containing reusable validations, e.g. validating duplicates in feature values, see its link:{javadoc-location}/org/espilce/periksa/validation/ValidationLibrary.html[javadoc]
+
+==== Using the @Check annotation
+
+POJO or extending DeclarativeValidator
+
+Extending ContextAwareDeclarativeValidator
+
+Using Xtend
+
+==== Using the @ComposedChecks annotation
+
+=== Registering validators
+
+==== Using the API
+
+TODO: Explain EValidatorRegistrar API
+
+==== Using an extension point

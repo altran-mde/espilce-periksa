@@ -37,6 +37,9 @@ mde-build:
       # These outputs should be used as input in other build stages
       # P2 repository
       - 'releng/*/target/repository/*'
+      # Documentation
+      - 'component/org.espilce.periksa.guide.developer/target/site'
+      - 'component/org.espilce.periksa.javadoc/target/reference/api'
     expire_in: 1 week
 
 mde-unit-test:
@@ -67,9 +70,10 @@ mde-release:
   stage: release
   # MDE release needs the artifacts from mde-build to be deployed
   dependencies: [mde-build]
-  only:
-    - develop
-    - tags
+# TODO: Enable before merge to develop!
+#  only:
+#    - develop
+#    - tags
   tags:
     - linux_docker
   script:
@@ -79,3 +83,21 @@ mde-release:
     paths:
       - reports/release/binaries
     expire_in: 4 weeks
+    
+pages:
+  stage: publish
+  # Pages needs the artifacts from mvn-build
+  dependencies: [mde-build]
+  tags:
+    - linux_docker
+# TODO: Enable before merge to develop!
+#  only:
+#    - develop
+  script:
+    - cp -R component/org.espilce.periksa.guide.developer/target/site public/
+    - cp -R component/org.espilce.periksa.javadoc/target/reference/api public/api/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+    

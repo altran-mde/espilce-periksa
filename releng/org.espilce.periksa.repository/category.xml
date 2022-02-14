@@ -6,6 +6,9 @@
    <feature id="org.espilce.periksa.testsupport.feature" version="0.0.0">
       <category name="EspilcePeriksaP2"/>
    </feature>
+   <feature id="org.espilce.periksa.sdk" version="0.0.0">
+      <category name="EspilcePeriksaP2"/>
+   </feature>
    <bundle id="org.espilce.periksa.validation">
       <category name="EspilcePeriksaP2"/>
    </bundle>

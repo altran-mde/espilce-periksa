@@ -1,7 +1,7 @@
-# Espilce Periksa
+= Espilce Periksa
 
 EMF Validator framework and utilities
 
-## Name Origin
+== Name Origin
 
-[Indonesian for "to carefully inspect"](https://en.wiktionary.org/wiki/periksa#Indonesian)
+https://en.wiktionary.org/wiki/periksa#Indonesian[Indonesian for "to carefully inspect"]

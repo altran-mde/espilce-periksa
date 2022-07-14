@@ -1,39 +1,34 @@
+/*******************************************************************************
+ * Copyright (C) 2020 Altran Netherlands B.V.
+ * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ * 
+ * SPDX-License-Identifier: EPL-2.0
+ *******************************************************************************/
 package org.espilce.periksa.test
 
-import java.util.List
+import java.io.IOException
 import org.espilce.periksa.test.testModel.Entity
-import org.espilce.periksa.test.testModel.TestModelPackage
 import org.espilce.periksa.validation.Check
-import org.eclipse.emf.ecore.EPackage
-import org.espilce.periksa.validation.AbstractPeriksaValidator
+import org.espilce.periksa.validation.CheckContext
+import org.espilce.periksa.validation.CheckMethod
 
-class ModelValidator extends AbstractPeriksaValidator {
+class ModelValidator extends ModelValidatorBase {
     
-    override List<EPackage> getEPackages() {
-        newArrayList(TestModelPackage.eINSTANCE);
-    }
-    
-    @Check
-    def void checkNameContainsAtLeast3Chars(Entity entity) {
-        if (entity.name.length < 3) {
-            error("Name should contain at least 3 characters", 
-                TestModelPackage.Literals.ENTITY__NAME, "code", "data")
-        }
-    }
-    
-    @Check
-    def void checkNameStartsWithCapital(Entity entity) {
-        if (!Character.isUpperCase(entity.name.charAt(0))) {
-            warning("Name should start with a capital", 
-                TestModelPackage.Literals.ENTITY__NAME)
-        }
-    }
+	@Check
+	def void throwException(Entity entity) {
+		if ("ThrowException" == entity.name) {
+			throw new IOException();
+		}
+	}
 
-    @Check
-    def void throwException(Entity entity) {
-        if ("ThrowException" == entity.name) {
-            throw new IllegalArgumentException();
-        }
-    }
-
+	override protected handleCheckMethodInvocationException(Throwable throwable, CheckMethod method,
+		CheckContext context) {
+		if (throwable instanceof IOException) {
+			throw new IllegalArgumentException(throwable);
+		}
+		super.handleCheckMethodInvocationException(throwable, method, context)
+	}
 }

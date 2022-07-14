@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jdt.annotation.NonNull;
@@ -730,6 +731,20 @@ public abstract class ATestValidator {
 	}
 	
 	/**
+	 * Creates an EMF Resource containing the <tt>eObjects</tt>
+	 * 
+	 * @param eObjects
+	 *            The objects to add to the created Resource
+	 * @return A new instance of Resource
+	 * @see #createResourceSet(Resource...)
+	 */
+	protected Resource createResource(final EObject... eObjects) {
+		final Resource resource = new ResourceImpl();
+		resource.getContents().addAll(Arrays.asList(eObjects));
+		return resource;
+	}
+	
+	/**
 	 * Creates the EMF ResourceSet to load models into.
 	 *
 	 * <p>
@@ -739,13 +754,16 @@ public abstract class ATestValidator {
 	 * Override to provide specialized ResourceSets.
 	 * </p>
 	 * 
+	 * @param resources
+	 *            the resources to initially add to the resource set
 	 * @return A new instance of ResourceSet.
 	 * 
 	 * @since 0.1
 	 */
-	protected @NonNull ResourceSet createResourceSet() {
+	protected @NonNull ResourceSet createResourceSet(final Resource... resources) {
 		final ResourceSetImpl result = new ResourceSetImpl();
 		result.setPackageRegistry(this.ePackageRegistry);
+		result.getResources().addAll(Arrays.asList(resources));
 		return result;
 	}
 	
@@ -862,7 +880,7 @@ public abstract class ATestValidator {
 	private @NonNull Diagnostic validateResourceSet(final @NonNull ResourceSet resourceSet) {
 		final Diagnostician diagnostician = createDiagnostician();
 		
-		final BasicDiagnostic allDiagnostic = new BasicDiagnostic();
+		final BasicDiagnostic allDiagnostic = createEmptyBasicDiagnostic();
 		
 		for (final Resource resource : new CopyOnWriteArrayList<>(resourceSet.getResources())) {
 			validateResource(diagnostician, allDiagnostic, resource);
@@ -872,13 +890,13 @@ public abstract class ATestValidator {
 	}
 	
 	private BasicDiagnostic validateResource(final Resource resource) {
-		return validateResource(createDiagnostician(), new BasicDiagnostic(), resource);
+		return validateResource(createDiagnostician(), createEmptyBasicDiagnostic(), resource);
 	}
 	
 	private BasicDiagnostic validateResource(
 			final Diagnostician diagnostician, final BasicDiagnostic allDiagnostic, final Resource resource
 	) {
-		final BasicDiagnostic resourceDiagnostic = new BasicDiagnostic();
+		final BasicDiagnostic resourceDiagnostic = createEmptyBasicDiagnostic();
 		allDiagnostic.add(resourceDiagnostic);
 		
 		for (final EObject eObject : resource.getContents()) {
@@ -889,13 +907,13 @@ public abstract class ATestValidator {
 	}
 	
 	private BasicDiagnostic validateEObject(final @NonNull EObject eObject) {
-		return validateEObject(createDiagnostician(), new BasicDiagnostic(), eObject);
+		return validateEObject(createDiagnostician(), createEmptyBasicDiagnostic(), eObject);
 	}
 	
 	private BasicDiagnostic validateEObject(
 			final Diagnostician diagnostician, final BasicDiagnostic resourceDiagnostic, final EObject eObject
 	) {
-		final BasicDiagnostic diagnostic = new BasicDiagnostic();
+		final BasicDiagnostic diagnostic = createEmptyBasicDiagnostic();
 		resourceDiagnostic.add(diagnostic);
 		diagnostician.validate(eObject, diagnostic);
 		
@@ -916,7 +934,7 @@ public abstract class ATestValidator {
 			final @Nullable String errorMsg
 	) {
 		if (isValidMessage(errorMsg)) {
-			assertEquals(message, errorMsg, diagnostic.getMessage());
+			assertEquals(errorMsg, diagnostic.getMessage(), message);
 		}
 	}
 	
@@ -983,5 +1001,9 @@ public abstract class ATestValidator {
 			
 			assertArrayEquals(issueData, cleansedIssueData.toArray(), message);
 		}
+	}
+	
+	private BasicDiagnostic createEmptyBasicDiagnostic() {
+		return new BasicDiagnostic(null, 0, null, null);
 	}
 }

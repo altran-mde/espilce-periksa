@@ -12,6 +12,10 @@ import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelFactory;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 
+import org.espilce.periksa.test.testModel.special.SpecialPackage;
+
+import org.espilce.periksa.test.testModel.special.impl.SpecialPackageImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -76,11 +80,19 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SpecialPackage.eNS_URI);
+		SpecialPackageImpl theSpecialPackage = (SpecialPackageImpl) (registeredPackage instanceof SpecialPackageImpl
+				? registeredPackage
+				: SpecialPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theTestModelPackage.createPackageContents();
+		theSpecialPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTestModelPackage.initializePackageContents();
+		theSpecialPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTestModelPackage.freeze();
@@ -167,6 +179,13 @@ public class TestModelPackageImpl extends EPackageImpl implements TestModelPacka
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		SpecialPackage theSpecialPackage = (SpecialPackage) EPackage.Registry.INSTANCE
+				.getEPackage(SpecialPackage.eNS_URI);
+
+		// Add subpackages
+		getESubpackages().add(theSpecialPackage);
 
 		// Create type parameters
 

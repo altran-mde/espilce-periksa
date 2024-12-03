@@ -13,4 +13,18 @@
     <version>0.1.0-SNAPSHOT</version>
     <relativePath>../releng/org.espilce.periksa.parent</relativePath>
   </parent>
+
+  <modules>
+    <module>org.espilce.periksa.validation</module>
+    <module>org.espilce.periksa.validation.registry</module>
+    <module>org.espilce.periksa.feature</module>
+
+    <module>org.espilce.periksa.testsupport</module>
+    <module>org.espilce.periksa.test</module>
+    <module>org.espilce.periksa.testsupport.feature</module>
+
+    <module>org.espilce.periksa.javadoc</module>
+    <module>org.espilce.periksa.guide.developer</module>
+    <module>org.espilce.periksa.sdk</module>
+  </modules>
 </project>

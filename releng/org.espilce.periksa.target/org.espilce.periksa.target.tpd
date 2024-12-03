@@ -2,6 +2,13 @@ target "Espilce Periksa"
 
 with configurePhase source
 
+location "http://download.eclipse.org/releases/oxygen" {
+	org.eclipse.emf.sdk.feature.group lazy
+	org.eclipse.xtext.sdk.feature.group lazy
+	org.eclipse.xtend.feature.group lazy
+	org.eclipse.sdk.feature.group lazy
+}
+
 location "http://download.eclipse.org/tools/orbit/downloads/drops/R20180330011457/repository" {
     com.google.guava [15.0.0,15.0.1)
     com.google.guava.source [15.0.0,15.0.1)
@@ -9,20 +16,13 @@ location "http://download.eclipse.org/tools/orbit/downloads/drops/R2018033001145
     org.apache.commons.lang3.source [3.1.0,3.1.1)
 }
 
-location "http://download.eclipse.org/releases/oxygen" {
-	org.eclipse.emf.sdk.feature.group	
-	org.eclipse.xtext.sdk.feature.group
-	org.eclipse.xtend.feature.group
-	org.eclipse.sdk.feature.group
-}
-
 location "http://download.eclipse.org/cbi/updates/license/" {
     org.eclipse.license.feature.group [2.0.2,2.0.3)
 }
 
 location "https://altran-mde.github.io/espilce-commons-staging/1.0/repository/" espilce-commons-p2 {
-    org.espilce.commons.emf.feature.feature.group
-    org.espilce.commons.emf.registry.feature.feature.group
-    org.espilce.commons.emf.textrenderer.feature.feature.group
-    org.espilce.commons.lang.feature.feature.group
+    org.espilce.commons.emf.feature.feature.group lazy
+    org.espilce.commons.emf.registry.feature.feature.group lazy
+    org.espilce.commons.emf.textrenderer.feature.feature.group lazy
+    org.espilce.commons.lang.feature.feature.group lazy
 }

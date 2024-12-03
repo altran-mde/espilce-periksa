@@ -13,7 +13,11 @@
     <genClasses ecoreClass="testModel.ecore#//Entity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//Entity/name"/>
     </genClasses>
-    <nestedGenPackages prefix="Special" disposableProviderFactory="true" ecorePackage="testModel.ecore#//special">
+    <genClasses ecoreClass="testModel.ecore#//EntityContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference testModel.ecore#//EntityContainer/entities"/>
+    </genClasses>
+    <nestedGenPackages prefix="Special" basePackage="org.espilce.periksa.test.testModel"
+        disposableProviderFactory="true" ecorePackage="testModel.ecore#//special">
       <genClasses ecoreClass="testModel.ecore#//special/SpecialEntity">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute testModel.ecore#//special/SpecialEntity/description"/>
       </genClasses>

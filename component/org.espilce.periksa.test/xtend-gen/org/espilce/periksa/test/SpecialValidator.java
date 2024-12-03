@@ -11,7 +11,7 @@ package org.espilce.periksa.test;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.espilce.periksa.test.EntityStartsWithCapital;
+import org.espilce.periksa.test.ModelValidations;
 import org.espilce.periksa.test.ModelValidator;
 import org.espilce.periksa.test.testModel.Entity;
 import org.espilce.periksa.test.testModel.TestModelPackage;
@@ -20,7 +20,7 @@ import org.espilce.periksa.validation.CheckContext;
 import org.espilce.periksa.validation.ComposedChecks;
 import org.espilce.periksa.validation.DeclarativeValidator;
 
-@ComposedChecks({ ModelValidator.class, EntityStartsWithCapital.class })
+@ComposedChecks({ ModelValidator.class, ModelValidations.class })
 @SuppressWarnings("all")
 public class SpecialValidator extends DeclarativeValidator {
   @Check

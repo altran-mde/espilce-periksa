@@ -115,5 +115,4 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 		}
 		return result.toString();
 	}
-
 }

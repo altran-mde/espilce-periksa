@@ -31,6 +31,15 @@ public interface TestModelFactory extends EFactory {
 	Entity createEntity();
 
 	/**
+	 * Returns a new object of class '<em>Entity Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entity Container</em>'.
+	 * @generated
+	 */
+	EntityContainer createEntityContainer();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

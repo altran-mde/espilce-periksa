@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.espilce.periksa.test.testModel.Entity;
+import org.espilce.periksa.test.testModel.EntityContainer;
 import org.espilce.periksa.test.testModel.TestModelFactory;
 import org.espilce.periksa.test.testModel.TestModelPackage;
 import org.espilce.periksa.test.testModel.special.SpecialEntity;
@@ -37,7 +38,7 @@ public class ValidationTest extends ATestValidator {
 		if (null == bundle) {
 			Logger.getLogger(ValidationTest.class.getName()).info("ModelValidator Standalone configuration");
 			final EValidatorRegistrar registrar = new EValidatorRegistrar();
-			registrar.register(TestModelPackage.eINSTANCE, DeclarativeValidator.of(EntityStartsWithCapital.class));
+			registrar.register(TestModelPackage.eINSTANCE, DeclarativeValidator.of(ModelValidations.class));
 			registrar.register(TestModelPackage.eINSTANCE, new ModelValidator());
 			registrar.register(SpecialPackage.eINSTANCE, new SpecialValidator());
 		} else {
@@ -115,5 +116,55 @@ public class ValidationTest extends ATestValidator {
 		assertWarningPresent("Name should start with a capital", entity, TestModelPackage.Literals.ENTITY__NAME);
 		assertWarningPresent("Name should start with a capital", entity);
 		assertWarningPresent(entity, null);
+	}
+	
+	@Test
+	public void testDuplicateName() {
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("DuplicateName");
+		SpecialEntity specialEntity = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity.setName("DuplicateName");
+		EntityContainer entityContainer = TestModelFactory.eINSTANCE.createEntityContainer();
+		entityContainer.getEntities().add(entity);
+		entityContainer.getEntities().add(specialEntity);
+		validateModel(createResource(entityContainer));
+		
+		assertErrorPresent("Duplicate name", entity, TestModelPackage.Literals.ENTITY__NAME);
+		assertErrorPresent("Duplicate name", specialEntity, TestModelPackage.Literals.ENTITY__NAME);
+	}
+
+	@Test
+	public void testDuplicateDescription() {
+		Entity entity = TestModelFactory.eINSTANCE.createEntity();
+		entity.setName("Entity");
+		SpecialEntity specialEntity1 = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity1.setName("SpecialEntity1");
+		specialEntity1.setDescription("DuplicateDescription");
+		SpecialEntity specialEntity2 = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity2.setName("SpecialEntity2");
+		specialEntity2.setDescription("DuplicateDescription");
+		EntityContainer entityContainer = TestModelFactory.eINSTANCE.createEntityContainer();
+		entityContainer.getEntities().add(entity);
+		entityContainer.getEntities().add(specialEntity1);
+		entityContainer.getEntities().add(specialEntity2);
+		validateModel(createResource(entityContainer));
+		
+		assertErrorPresent("Duplicate description", specialEntity1, SpecialPackage.Literals.SPECIAL_ENTITY__DESCRIPTION);
+		assertErrorPresent("Duplicate description", specialEntity2, SpecialPackage.Literals.SPECIAL_ENTITY__DESCRIPTION);
+	}
+
+	@Test
+	public void testDuplicateDescriptionOmitDefaults() {
+		SpecialEntity specialEntity1 = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity1.setName("SpecialEntity1");
+		SpecialEntity specialEntity2 = SpecialFactory.eINSTANCE.createSpecialEntity();
+		specialEntity2.setName("SpecialEntity2");
+		EntityContainer entityContainer = TestModelFactory.eINSTANCE.createEntityContainer();
+		entityContainer.getEntities().add(specialEntity1);
+		entityContainer.getEntities().add(specialEntity2);
+		validateModel(createResource(entityContainer));
+		
+		assertNoErrorsOrWarnings(specialEntity1);
+		assertNoErrorsOrWarnings(specialEntity2);
 	}
 }

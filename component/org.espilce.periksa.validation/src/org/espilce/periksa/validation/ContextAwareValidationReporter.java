@@ -32,14 +32,27 @@ public interface ContextAwareValidationReporter extends ValidationReporter {
 	 */
 	void error(String message, EStructuralFeature feature, int index, String code, String... issueData);
 
+	/**
+	 * See {@link #error(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX}.
+	 */
 	default void error(String message, EStructuralFeature feature, String code, String... issueData) {
 		error(message, feature, INSIGNIFICANT_INDEX, code, issueData);
 	}
 
+	/**
+	 * See {@link #error(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX},
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void error(String message, EStructuralFeature feature) {
 		error(message, feature, INSIGNIFICANT_INDEX);
 	}
 
+	/**
+	 * See {@link #error(String, EStructuralFeature, String, String...)} where
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void error(String message, EStructuralFeature feature, int index) {
 		error(message, feature, index, null);
 	}
@@ -59,14 +72,27 @@ public interface ContextAwareValidationReporter extends ValidationReporter {
 	 */
 	void warning(String message, EStructuralFeature feature, int index, String code, String... issueData);
 
+	/**
+	 * See {@link #warning(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX}.
+	 */
 	default void warning(String message, EStructuralFeature feature, String code, String... issueData) {
 		warning(message, feature, INSIGNIFICANT_INDEX, code, issueData);
 	}
 
+	/**
+	 * See {@link #warning(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX},
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void warning(String message, EStructuralFeature feature) {
 		warning(message, feature, INSIGNIFICANT_INDEX);
 	}
 
+	/**
+	 * See {@link #warning(String, EStructuralFeature, String, String...)} where
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void warning(String message, EStructuralFeature feature, int index) {
 		warning(message, feature, index, null);
 	}
@@ -87,14 +113,27 @@ public interface ContextAwareValidationReporter extends ValidationReporter {
 	 */
 	void info(String message, EStructuralFeature feature, int index, String code, String... issueData);
 
+	/**
+	 * See {@link #info(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX}.
+	 */
 	default void info(String message, EStructuralFeature feature, String code, String... issueData) {
 		info(message, feature, INSIGNIFICANT_INDEX, code, issueData);
 	}
 
+	/**
+	 * See {@link #info(String, EStructuralFeature, String, String...)} where
+	 * <code>index</code> is {@link ValidationReporter#INSIGNIFICANT_INDEX},
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void info(String message, EStructuralFeature feature) {
 		info(message, feature, INSIGNIFICANT_INDEX, null);
 	}
 
+	/**
+	 * See {@link #info(String, EStructuralFeature, String, String...)} where
+	 * <code>code</code> is <code>null</code> and <code>issueData</code> is empty.
+	 */
 	default void info(String message, EStructuralFeature feature, int index) {
 		info(message, feature, index, null);
 	}

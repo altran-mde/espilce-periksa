@@ -58,6 +58,8 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 		switch (eClass.getClassifierID()) {
 		case TestModelPackage.ENTITY:
 			return createEntity();
+		case TestModelPackage.ENTITY_CONTAINER:
+			return createEntityContainer();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -72,6 +74,17 @@ public class TestModelFactoryImpl extends EFactoryImpl implements TestModelFacto
 	public Entity createEntity() {
 		EntityImpl entity = new EntityImpl();
 		return entity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EntityContainer createEntityContainer() {
+		EntityContainerImpl entityContainer = new EntityContainerImpl();
+		return entityContainer;
 	}
 
 	/**

@@ -10,11 +10,14 @@
 package org.espilce.periksa.test
 
 import org.espilce.periksa.test.testModel.Entity
+import org.espilce.periksa.test.testModel.EntityContainer
 import org.espilce.periksa.test.testModel.TestModelPackage
+import org.espilce.periksa.test.testModel.special.SpecialPackage
 import org.espilce.periksa.validation.Check
 import org.espilce.periksa.validation.CheckContext
+import org.espilce.periksa.validation.ValidationLibrary
 
-final class EntityStartsWithCapital {
+final class ModelValidations {
 	private new() {
 		// Empty for utility classes
 	}
@@ -25,4 +28,10 @@ final class EntityStartsWithCapital {
 			report.warning("Name should start with a capital", TestModelPackage.Literals.ENTITY__NAME)
 		}
 	}
+
+    
+    @Check
+    static def void checkDuplicateDescription(EntityContainer entityContainer, CheckContext context) {
+    	ValidationLibrary::checkDuplicateValue(entityContainer.entities, SpecialPackage.Literals.SPECIAL_ENTITY__DESCRIPTION, context)
+    }
 }

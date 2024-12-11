@@ -32,6 +32,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 
 /**
+ * Base class for {@link EValidator} that defines validations by means of
+ * implementing methods that are annotated with the {@link Check} annotation.
+ * The implementer of this class should declare two parameters for each
+ * annotated validation method:
+ * <ol>
+ * <li>The model element to be validated, should be assignable from
+ * {@link EObject}.</li>
+ * <li>The {@link CheckContext} to report validation messages.</li>
+ * </ol>
+ * When extending this class directly, please consider to extend
+ * {@link ContextAwareDeclarativeValidator} instead as it eases writing
+ * validations.
+ * 
  * @author itemis AG - Initial contribution and API
  * @author Altran Netherlands B.V. - Refactoring including API updates
  */
@@ -48,6 +61,22 @@ public class DeclarativeValidator implements EValidator {
 		this.validatorInstanceSupplier = () -> this;
 	}
 
+	/**
+	 * Creates a {@link DeclarativeValidator} providing all {@link Check} annotated
+	 * methods in <code>validatorClazz</code>.<br>
+	 * Note that either all {@link Check} annotated methods in
+	 * <code>validatorClazz</code> should be <code>static</code> or
+	 * <code>validatorClazz</code> should implement a default public constructor.
+	 * 
+	 * @param validatorClazz a class containing {@link Check} annotated validation
+	 *                       methods.
+	 * @return an {@link EValidator} providing validations as defined in
+	 *         <code>validatorClazz</code>.
+	 * @throws IllegalArgumentException If {@link EValidator}
+	 *                                  {@link Class#isAssignableFrom(Class) is
+	 *                                  assignable from}
+	 *                                  <code>validatorClazz</code>.
+	 */
 	public static DeclarativeValidator of(Class<?> validatorClazz) throws IllegalArgumentException {
 		if (EValidator.class.isAssignableFrom(validatorClazz)) {
 			throw new IllegalArgumentException(
@@ -64,6 +93,17 @@ public class DeclarativeValidator implements EValidator {
 		this.validatorInstanceSupplier = lazyInstance(validatorClazz);
 	}
 
+	/**
+	 * Creates a {@link DeclarativeValidator} providing all {@link Check} annotated
+	 * methods in <code>validatorInstance</code>.
+	 * 
+	 * @param validatorInstance an object of which its class contains {@link Check}
+	 *                          annotated validation methods.
+	 * @return an {@link EValidator} providing validations as defined in
+	 *         <code>validatorInstance</code>.
+	 * @throws IllegalArgumentException If <code>validatorInstance</code> is an
+	 *                                  instance of {@link EValidator}.
+	 */
 	public static DeclarativeValidator of(Object validatorInstance) throws IllegalArgumentException {
 		if (validatorInstance instanceof EValidator) {
 			throw new IllegalArgumentException(

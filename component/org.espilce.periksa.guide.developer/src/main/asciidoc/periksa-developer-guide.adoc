@@ -1,0 +1,31 @@
+= Espilce Periksa: Developer Guide
+EC Modeling & Simulation
+:description: This page contains information about the Espilce Periksa MDE Asset.
+:keywords: EMF, Documentation, MDE, Asset, Capgemini, Engineering, EC, Modeling, Simulation, Validation
+:classification:  Public.
+:docinfo2:
+
+include::_attributes.adoc[]
+
+
+Espilce Periksa is an EMF Validator framework.
+
+TIP: Name origin: Indonesian for "to carefully inspect"  
+
+Due to the fragile support of the OCL language and the limited scalability and performance, Altran needs to integrate different solutions for developing EMF Validators.
+Such validators are essential for the end-customer to verify that the DSL models created are complete and correct for the intended use. 
+It is one of the cornerstones of the increased productivity to achieve by applying DSL solutions.
+
+ifdef::output-html[]
+ifdef::output-site[]
+TIP: This developer guide can be downloaded as link:{source-document-name}.pdf[PDF]
+endif::output-site[]
+endif::output-html[]
+
+<<<
+
+include::section-quick-reference-guide.adoc[]
+
+<<<
+
+include::section-programmers-guide.adoc[]

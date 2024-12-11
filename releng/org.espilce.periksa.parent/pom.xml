@@ -13,7 +13,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 
-    <jgit-version>5.5.1.201910021850-r</jgit-version>
+    <jgit-version>5.13.3.202401111512-r</jgit-version>
 
     <!-- Tycho settings -->
     <tycho-version>1.4.0</tycho-version>

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.espilce.periksa.test;singleton:=true
 Automatic-Module-Name: org.espilce.periksa.test
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 2.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

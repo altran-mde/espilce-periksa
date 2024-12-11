@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.espilce.periksa</groupId>
   <artifactId>org.espilce.periksa.parent</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>2.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -13,7 +13,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 
-    <periksa-target-version>0.1.0-SNAPSHOT</periksa-target-version>
+    <periksa-target-version>2.1.0-SNAPSHOT</periksa-target-version>
     <jgit-version>5.5.1.201910021850-r</jgit-version>
 
     <!-- Tycho settings -->
@@ -132,6 +132,12 @@
 
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-p2-repository-plugin</artifactId>
           <version>${tycho-version}</version>
           <configuration>
@@ -211,6 +217,17 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
+    </pluginRepository>
+    <!-- com.bsiag.geneclipsetoc:geneclipsetoc-maven-plugin -->
+    <pluginRepository>
+        <id>geneclipsetoc-releases</id>
+        <url>https://bsi-software.github.io/geneclipsetoc</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
     </pluginRepository>
   </pluginRepositories>
   <profiles>

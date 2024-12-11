@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.espilce.periksa</groupId>
   <artifactId>org.espilce.periksa.parent</artifactId>
-  <version>2.1.0-SNAPSHOT</version>
+  <version>2.1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -13,7 +13,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 
-    <periksa-target-version>2.1.0-SNAPSHOT</periksa-target-version>
     <jgit-version>5.5.1.201910021850-r</jgit-version>
 
     <!-- Tycho settings -->
@@ -55,7 +54,7 @@
             <artifact>
               <groupId>org.espilce.periksa</groupId>
               <artifactId>org.espilce.periksa.target</artifactId>
-              <version>${periksa-target-version}</version>
+              <version>2.1.1-SNAPSHOT</version>
             </artifact>
           </target>
           <environments>
@@ -118,6 +117,12 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-versions-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-source-plugin</artifactId>

@@ -2,8 +2,8 @@
 <feature
       id="org.espilce.periksa.feature"
       label="Espilce Periksa Feature"
-      version="2.0.0.qualifier"
-      provider-name="Altran"
+      version="2.1.1.qualifier"
+      provider-name="Capgemini Engineering"
       license-feature="org.eclipse.license"
       license-feature-version="2.0.2">
 

@@ -2,8 +2,10 @@
 <feature
       id="org.espilce.periksa.sdk"
       label="Espilce Periksa SDK"
-      version="2.0.0.qualifier"
-      provider-name="Capgemini Engineering">
+      version="2.1.1.qualifier"
+      provider-name="Capgemini Engineering"
+      license-feature="org.eclipse.license"
+      license-feature-version="2.0.2">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

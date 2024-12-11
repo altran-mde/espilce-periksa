@@ -3,9 +3,10 @@
 <repository name='Espilce Periksa'
     type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>
   <properties size='1'>
-    <property name='p2.timestamp' value='20220714140000'/>
+    <property name='p2.timestamp' value='20241211090000'/>
   </properties>
-  <children size='2'>
+  <children size='3'>
+    <child location='2.1/repository/'/>
     <child location='2.0/repository/'/>
     <child location='http://altran-mde.github.io/espilce-commons-staging/1.0/repository/'/>
   </children>
